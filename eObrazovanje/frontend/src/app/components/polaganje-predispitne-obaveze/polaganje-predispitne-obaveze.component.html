@@ -1,0 +1,35 @@
+<div class="container my-page-container">
+  <h1 class="text-center mb-4">Predispitne obaveze (polaganje)</h1>
+  <button class="btn btn-primary" *ngIf="utils.hasAnyRole(['ADMIN', 'NASTAVNIK'])" routerLink="/polaganje-predispitne-obaveze-dodavanje">Dodavanje</button>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>Student</th>
+      <th>Predispitna obaveza</th>
+      <th>Datum</th>
+      <th>Bodovi</th>
+      <th>Položio</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let polaganje of polaganjePredispitneObavezeList">
+      <td>{{polaganje.id}}</td>
+      <td>{{polaganje.student?.ime}} {{polaganje.student?.prezime}}</td>
+      <td>{{polaganje.predispitnaObaveza?.naziv}} ({{polaganje.predispitnaObaveza?.predmet?.naziv}})</td>
+      <td>{{polaganje.datum}}</td>
+      <td>{{polaganje.bodovi}}</td>
+      <td>{{polaganje.polozio? 'Položio' : 'Nije položio'}}</td>
+      <td>
+        <button class="btn btn-warning" *ngIf="utils.hasAnyRole(['ADMIN'])" [routerLink]="['/polaganje-predispitne-obaveze', polaganje.id]">Izmena</button>
+        &nbsp;
+        <button class="btn btn-danger" *ngIf="utils.hasAnyRole(['ADMIN'])" (click)="brisanjePredispitneObaveze(polaganje.id)">Brisanje</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <div class="d-flex justify-content-end">
+    <ngb-pagination [collectionSize]="totalCount" [page]="queryParams.page+1" [pageSize]="queryParams.size" (pageChange)="ucitavanjePredispitnihObaveze($event-1)"></ngb-pagination>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+<ng-container *ngIf="isAuthenticated()">
+  <app-predavaci *ngIf="utils.hasAnyRole(['ADMIN'])"></app-predavaci>
+  <app-predmet *ngIf="utils.hasAnyRole(['NASTAVNIK'])"></app-predmet>
+  <app-student-profile *ngIf="utils.hasAnyRole(['STUDENT'])"></app-student-profile>
+</ng-container>
+
+<ng-container *ngIf="!isAuthenticated()">
+  <app-login></app-login>
+</ng-container>

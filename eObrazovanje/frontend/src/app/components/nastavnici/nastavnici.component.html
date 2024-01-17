@@ -1,0 +1,43 @@
+<div class="container my-page-container">
+  <h1 class="text-center mb-4">Nastavnici</h1>
+  <div class="row">
+    <div class="col-md-8">
+      <button class="btn btn-primary" *ngIf="utils.hasAnyRole(['ADMIN'])" routerLink="/nastavnik-dodavanje">Dodavanje</button>
+    </div>
+    <div class="col-md-4 text-right">
+      <input type="text" class="form-control" [(ngModel)]="params.search" (keyup)="ucitavanjeNastavnika(0)"
+             placeholder="Pretraga">
+    </div>
+  </div>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>#</th>
+      <th (click)="sort('username')">Username<app-sort column="username" [params]="params"></app-sort></th>
+      <th (click)="sort('ime')">Ime<app-sort column="ime" [params]="params"></app-sort></th>
+      <th (click)="sort('prezime')">Prezime<app-sort column="prezime" [params]="params"></app-sort></th>
+      <th (click)="sort('jmbg')">JMBG<app-sort column="jmbg" [params]="params"></app-sort></th>
+      <th (click)="sort('adresa')">Adresa<app-sort column="adresa" [params]="params"></app-sort></th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let nastavnik of nastavnici">
+      <td>{{nastavnik.id}}</td>
+      <td>{{nastavnik.username}}</td>
+      <td>{{nastavnik.ime}}</td>
+      <td>{{nastavnik.prezime}}</td>
+      <td>{{nastavnik.jmbg}}</td>
+      <td>{{nastavnik.adresa}}</td>
+      <td>
+        <button class="btn btn-warning" *ngIf="utils.hasAnyRole(['ADMIN'])" [routerLink]="['/nastavnici', nastavnik.id]">Izmena</button>
+        &nbsp;
+        <button class="btn btn-danger" *ngIf="utils.hasAnyRole(['ADMIN'])" (click)="brisanjeNastavnika(nastavnik.id)">Brisanje</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <div class="d-flex justify-content-end">
+    <ngb-pagination [collectionSize]="totalCount" [page]="params.page+1" [pageSize]="params.size" (pageChange)="ucitavanjeNastavnika($event-1)"></ngb-pagination>
+  </div>
+</div>

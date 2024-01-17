@@ -1,0 +1,35 @@
+<h1 class="text-center mb-4">{{pageTitle}}</h1>
+<div class="container d-flex justify-content-center">
+  <div>
+    <div class="mb-3" *ngIf="utils.hasAnyRole(['ADMIN'])">
+      <label for="student">Student</label>
+      <select class="form-select" id="student" [(ngModel)]="prijava.student" [compareWith]="compareWithId" [disabled]="studentDisabled || isDisabled" (ngModelChange)="ucitavanjeIspitnihRokova(prijava.student?.username)">
+        <option [ngValue]="null">Odaberi</option>
+        <option *ngFor="let student of studenti" [ngValue]="student">{{student.ime}} {{student.prezime}} ({{student?.brojIndeksa}})</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label for="ispitniRokovi">Ispit</label>
+      <select class="form-select" id="ispitniRokovi" [(ngModel)]="prijava.ispitniRok" [compareWith]="compareWithId" [disabled]="!prijava.student">
+        <option [ngValue]="null">Odaberi</option>
+        <option *ngFor="let ispit of ispitniRokovi" [ngValue]="ispit">
+          {{ispit.predaje?.predmet?.naziv}} ({{ispit.predaje?.nastavnik?.ime}} {{ispit.predaje?.nastavnik?.prezime}})
+        </option>
+      </select>
+    </div>
+
+    <div>
+      <label for="stanjeNaRacunu">Stanje na računu nakon prijave</label>
+      <input type="text" id="stanjeNaRacunu" class="form-control" disabled [ngModel]="stanjeNaRacunu">
+      <p><i>Prijavom ispita će se stanje na vašem računu umanjiti za 200 RSD.</i></p>
+    </div>
+
+
+    <div class="row my-3">
+      <div class="col-auto">
+        <button class="btn btn-primary" (click)="save()">Sačuvaj</button>
+      </div>
+    </div>
+  </div>
+</div>

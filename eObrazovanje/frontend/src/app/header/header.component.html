@@ -1,0 +1,62 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary" *ngIf="isAuthenticated()">
+  <div class="container-fluid d-flex justify-content-center">
+    <div>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item mt-2 mx-2">
+            <a ngbDropdownItem routerLink="/">Home</a>
+          </li>
+
+          <li ngbDropdown class="mx-2 nav-item" [routerLinkActive]="'active'">
+            <a type="button" class="nav-link" ngbDropdownToggle>Nastavnici</a>
+            <ul ngbDropdownMenu>
+              <li ngbDropdownItem class="dropdown-item" *ngIf="utils.hasAnyRole(['ADMIN'])" [routerLinkActive]="'active'" routerLink="/nastavnici">Nastavnici</li>
+              <li ngbDropdownItem class="dropdown-item" *ngIf="utils.hasAnyRole(['ADMIN'])" [routerLinkActive]="'active'" routerLink="/zvanja">Zvanja</li>
+              <li ngbDropdownItem class="dropdown-item" [routerLinkActive]="'active'" routerLink="/predavaci">Predavači</li>
+            </ul>
+          </li>
+          <li ngbDropdown class="mx-2 nav-item" *ngIf="utils.hasAnyRole(['ADMIN', 'NASTAVNIK'])" [routerLinkActive]="'active'">
+            <a type="button" class="nav-link" ngbDropdownToggle>Studenti</a>
+            <ul ngbDropdownMenu>
+              <li ngbDropdownItem class="dropdown-item" *ngIf="utils.hasAnyRole(['ADMIN'])" [routerLinkActive]="'active'" routerLink="/studenti">Studenti</li>
+              <li ngbDropdownItem class="dropdown-item" [routerLinkActive]="'active'" routerLink="/student-predmet">Polaznici</li>
+              <li ngbDropdownItem class="dropdown-item" *ngIf="utils.hasAnyRole(['ADMIN'])" [routerLinkActive]="'active'" routerLink="/uplate">Uplate</li>
+              <li ngbDropdownItem class="dropdown-item" *ngIf="utils.hasAnyRole(['ADMIN'])" [routerLinkActive]="'active'" routerLink="/dokumenti">Dokumenti</li>
+            </ul>
+          </li>
+          <li ngbDropdown class="mx-2 nav-item" [routerLinkActive]="'active'">
+            <a type="button" class="nav-link" ngbDropdownToggle>Predmeti</a>
+            <ul ngbDropdownMenu>
+              <li ngbDropdownItem class="dropdown-item" [routerLinkActive]="'active'" routerLink="/predmeti">Predmeti</li>
+              <li ngbDropdownItem class="dropdown-item" [routerLinkActive]="'active'" *ngIf="utils.hasAnyRole(['ADMIN'])" routerLink="/predispitne-obaveze">Predispitne obaveze</li>
+              <li ngbDropdownItem class="dropdown-item" [routerLinkActive]="'active'" *ngIf="utils.hasAnyRole(['ADMIN', 'NASTAVNIK'])" routerLink="/polaganje-predispitne-obaveze">Polaganje predispitne obaveze</li>
+            </ul>
+          </li>
+          <li ngbDropdown class="mx-2 nav-item" [routerLinkActive]="'active'">
+            <a type="button" class="nav-link" ngbDropdownToggle>Ispiti</a>
+            <ul ngbDropdownMenu class="dropdown-menu">
+              <li ngbDropdownItem class="dropdown-item" [routerLinkActive]="'active'" routerLink="/rokovi">Rokovi</li>
+              <li ngbDropdownItem class="dropdown-item" *ngIf="utils.hasAnyRole(['ADMIN', 'NASTAVNIK'])" [routerLinkActive]="'active'" routerLink="/ispiti">Ispiti</li>
+              <li ngbDropdownItem class="dropdown-item" *ngIf="utils.hasAnyRole(['ADMIN', 'NASTAVNIK'])" [routerLinkActive]="'active'" routerLink="/ispitni-rokovi">Ispitni rokovi</li>
+              <li ngbDropdownItem class="dropdown-item" *ngIf="utils.hasAnyRole(['ADMIN', 'NASTAVNIK'])" [routerLinkActive]="'active'" routerLink="/prijave">Prijave</li>
+            </ul>
+          </li>
+
+          <div class="d-flex justify-content-between">
+            <div ngbDropdown class="ms-5 nav-item" [routerLinkActive]="'active'">
+              <a type="button" class="nav-link" ngbDropdownToggle>Profil</a>
+              <ul ngbDropdownMenu class="dropdown-menu">
+                <li class="ms-2">{{username}}</li>
+                <hr>
+                <a ngbDropdownItem class="dropdown-item" [routerLinkActive]="'active'" *ngIf="utils.hasAnyRole(['STUDENT'])" [routerLink]="['/profile', username]">Profil</a>
+                <a ngbDropdownItem class="dropdown-item" [routerLinkActive]="'active'" routerLink="/promena-lozinke">Promena lozinke</a>
+                <li ngbDropdownItem class="dropdown-item" (click)="logout()">Odjava</li>
+              </ul>
+            </div>
+            <img src="assets/logo.png" alt="logo thumbnail" class="logo-thumbnail">
+          </div>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>

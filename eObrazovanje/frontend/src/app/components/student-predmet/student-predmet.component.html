@@ -1,0 +1,46 @@
+<div class="container my-page-container">
+  <h1 class="text-center mb-4">Polaznici nastave</h1>
+  <div class="row">
+    <div class="col-md-6">
+      <button class="btn btn-primary" *ngIf="utils.hasAnyRole(['ADMIN', 'NASTAVNIK'])" routerLink="/student-predmet-dodavanje">Dodavanje</button>
+    </div>
+    <div class="col-md-2">
+      <input type="number" class="form-control" placeholder="min bodova" [(ngModel)]="params.minBodova" (keyup)="ucitavanjeStudentPredmet(0)">
+      <input type="text" class="form-control" placeholder="max bodova" [(ngModel)]="params.maxBodova" (keyup)="ucitavanjeStudentPredmet(0)">
+    </div>
+    <div class="col-md-4 text-right">
+      <input type="text" class="form-control" [(ngModel)]="params.search" (keyup)="ucitavanjeStudentPredmet(0)"
+             placeholder="Pretraga">
+
+    </div>
+  </div>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>#</th>
+      <th (click)="sort('predmet')">Predmet <app-sort column="predmet" [params]="params"></app-sort></th>
+      <th (click)="sort('student')">Student<app-sort column="student" [params]="params"></app-sort></th>
+      <th (click)="sort('osvojeniBodovi')">Bodovi<app-sort column="osvojeniBodovi" [params]="params"></app-sort></th>
+      <th (click)="sort('polozio')">Polozio<app-sort column="polozio" [params]="params"></app-sort></th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let studentPredmet of studentPredmetList">
+      <td>{{studentPredmet.id}}</td>
+      <td>{{studentPredmet.predmet?.naziv}}</td>
+      <td>{{studentPredmet.student?.ime}} {{studentPredmet.student?.prezime}}</td>
+      <td>{{studentPredmet.osvojeniBodovi}}</td>
+      <td>{{studentPredmet.polozio? 'Polozio' : 'Nije polozio'}}</td>
+      <td>
+        <button class="btn btn-warning" [routerLink]="['/student-predmet', studentPredmet.id]">Izmena</button>
+        &nbsp;
+        <button class="btn btn-danger" *ngIf="utils.hasAnyRole(['ADMIN'])" (click)="brisanjeStudentPredmet(studentPredmet.id)">Brisanje</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <div class="d-flex justify-content-end">
+    <ngb-pagination [collectionSize]="totalCount" [page]="params.page+1" [pageSize]="params.size" (pageChange)="ucitavanjeStudentPredmet($event-1)"></ngb-pagination>
+  </div>
+</div>

@@ -1,0 +1,169 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$eobrazovanje-frontend-primary: mat.define-palette(mat.$indigo-palette);
+$eobrazovanje-frontend-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$eobrazovanje-frontend-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$eobrazovanje-frontend-theme: mat.define-light-theme((
+  color: (
+    primary: $eobrazovanje-frontend-primary,
+    accent: $eobrazovanje-frontend-accent,
+    warn: $eobrazovanje-frontend-warn,
+  )
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($eobrazovanje-frontend-theme);
+
+/* You can add global styles to this file, and also import other style files */
+@import "node_modules/bootstrap/scss/bootstrap";
+
+.dropdown.active {
+  .dropdown-toggle{
+    @extend .text-dark;
+  }
+}
+
+body {
+  background-color: #f0f0f0;
+  app-root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f0f0;
+
+  .login-form {
+    width: 400px;
+    padding: 30px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+
+    h1 {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .logo {
+      margin-bottom: 20px;
+      text-align: center;
+
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+    }
+
+    .form-label {
+      font-weight: 600;
+    }
+
+    .form-control {
+      border-radius: 3px;
+      border-color: #ddd;
+    }
+
+    .btn-primary {
+      background-color: #007bff;
+      border-color: #007bff;
+
+      &:hover {
+        background-color: #0069d9;
+        border-color: #0062cc;
+      }
+    }
+  }
+}
+
+.password-change-container {
+  height: 100vh;
+
+  .card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  label {
+    font-weight: bold;
+    color: #333;
+  }
+
+  input {
+    border-radius: 4px;
+    border: 1px solid #ddd;
+  }
+
+  button {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: #fff;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 8px 16px;
+
+    &:hover {
+      background-color: #0069d9;
+      border-color: #0062cc;
+    }
+  }
+}
+
+.logo-thumbnail {
+  height: 50px;
+  padding-left: 20px;
+}
+
+.my-page-container {
+  max-width: 1000px;
+}
+
+.student-page-container {
+  max-width: 1200px;
+}
+
+.my-footer {
+  background-color: #485e88;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  z-index: 9999;
+  margin-top: 50px;
+  .footer-container p {
+    margin-bottom: 0;
+  }
+}
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

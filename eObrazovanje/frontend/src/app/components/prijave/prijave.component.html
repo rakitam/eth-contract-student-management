@@ -1,0 +1,39 @@
+<div class="container my-page-container">
+  <h1 class="text-center mb-4">Prijave ispita</h1>
+  <div class="row">
+    <div class="col-md-8">
+      <button class="btn btn-primary" *ngIf="utils.hasAnyRole(['ADMIN'])" routerLink="/prijava-dodavanje">Dodavanje</button>
+    </div>
+    <div class="col-md-4 text-right">
+      <input type="text" class="form-control" [(ngModel)]="params.search" (keyup)="ucitavanjePrijava(0)"
+             placeholder="Pretraga">
+    </div>
+  </div>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>Nastavnik</th>
+      <th>Predmet</th>
+      <th>Student</th>
+      <th *ngIf="utils.hasAnyRole(['ADMIN'])"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let prijava of prijave">
+      <td>{{prijava.id}}</td>
+      <td>{{prijava.ispit?.predaje?.nastavnik?.ime}} {{prijava.ispit?.predaje?.nastavnik?.prezime}}</td>
+      <td>{{prijava.ispit?.predaje?.predmet?.naziv}}</td>
+      <td>{{prijava.ispit?.student?.ime}} {{prijava.ispit?.student?.prezime}}</td>
+      <td *ngIf="utils.hasAnyRole(['ADMIN'])">
+        <button class="btn btn-warning" [routerLink]="['/prijave', prijava.id]">Izmena</button>
+        &nbsp;
+<!--        <button class="btn btn-danger" (click)="brisanjePrijave(prijava.id)">Brisanje</button>-->
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <div class="d-flex justify-content-end">
+    <ngb-pagination [collectionSize]="totalCount" [page]="params.page+1" [pageSize]="params.size" (pageChange)="ucitavanjePrijava($event-1)"></ngb-pagination>
+  </div>
+</div>

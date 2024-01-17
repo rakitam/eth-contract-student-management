@@ -1,0 +1,1 @@
+INSERT INTO USER VALUES ('Admin', 'admin', 'Adminovic', 'ADMIN', 'admin');

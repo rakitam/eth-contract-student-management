@@ -1,0 +1,39 @@
+<div class="container my-page-container">
+  <h1 class="text-center mb-4">Rokovi</h1>
+  <div class="row">
+    <div class="col-md-8">
+      <button class="btn btn-primary" *ngIf="utils.hasAnyRole(['ADMIN'])" routerLink="/rok-dodavanje">Dodavanje</button>
+    </div>
+    <div class="col-md-4 text-right">
+      <input type="text" class="form-control" [(ngModel)]="params.search" (keyup)="ucitavanjeRoka(0)"
+             placeholder="Pretraga">
+    </div>
+  </div>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>#</th>
+      <th (click)="sort('naziv')">Naziv<app-sort column="naziv" [params]="params"></app-sort></th>
+      <th (click)="sort('pocetak')">Početak<app-sort column="pocetak" [params]="params"></app-sort></th>
+      <th (click)="sort('kraj')">Kraj<app-sort column="kraj" [params]="params"></app-sort></th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let rok of rokovi">
+      <td>{{rok.id}}</td>
+      <td>{{rok.naziv}}</td>
+      <td>{{rok.pocetak}}</td>
+      <td>{{rok.kraj}}</td>
+      <td>
+        <button class="btn btn-warning" *ngIf="utils.hasAnyRole(['ADMIN'])" [routerLink]="['/rokovi', rok.id]">Izmena</button>
+        &nbsp;
+        <button class="btn btn-danger" *ngIf="utils.hasAnyRole(['ADMIN'])" (click)="brisanjeRoka(rok.id)">Brisanje</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <div class="d-flex justify-content-end">
+    <ngb-pagination [collectionSize]="totalCount" [page]="params.page+1" [pageSize]="params.size" (pageChange)="ucitavanjeRoka($event-1)"></ngb-pagination>
+  </div>
+</div>

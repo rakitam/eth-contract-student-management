@@ -1,0 +1,37 @@
+<div class="container my-page-container">
+  <h1 class="text-center mb-4">Uplate</h1>
+  <div class="row">
+    <div class="col-md-8">
+      <button class="btn btn-primary" *ngIf="utils.hasAnyRole(['ADMIN'])" routerLink="/uplata-dodavanje">Dodavanje</button>
+    </div>
+    <div class="col-md-4 text-right">
+      <input type="text" class="form-control" [(ngModel)]="params.search" (keyup)="ucitavanjeUplata(0)"
+             placeholder="Pretraga">
+    </div>
+  </div>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>#</th>
+      <th (click)="sort('student')">Student<app-sort column="student" [params]="params"></app-sort></th>
+      <th (click)="sort('iznos')">Iznos<app-sort column="iznos" [params]="params"></app-sort></th>
+      <th (click)="sort('datum')">Datum<app-sort column="datum" [params]="params"></app-sort></th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let uplata of uplate">
+      <td>{{uplata.id}}</td>
+      <td>{{uplata.student?.ime}} {{uplata.student?.prezime}}</td>
+      <td>{{uplata.iznos}}</td>
+      <td>{{uplata.datum}}</td>
+      <td>
+        <button class="btn btn-danger" *ngIf="utils.hasAnyRole(['ADMIN'])" [disabled]="uplata?.stornirano" (click)="storniranjeUplate(uplata.id)">Storniranje</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <div class="d-flex justify-content-end">
+    <ngb-pagination [collectionSize]="totalCount" [page]="params.page+1" [pageSize]="params.size" (pageChange)="ucitavanjeUplata($event-1)"></ngb-pagination>
+  </div>
+</div>

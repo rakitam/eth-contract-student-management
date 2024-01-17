@@ -1,0 +1,11 @@
+https://doc.tryethernal.com/getting-started/quickstart
+
+npm install ethernal -g
+
+set ETHERNAL_EMAIL=mrakita1993@gmail.com
+set ETHERNAL_PASSWORD=Sirobacilim1993
+
+ethernal listen
+ethernal login ne mora ako sam logged in u browseru
+
+dodati i ABI contract-a

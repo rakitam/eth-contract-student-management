@@ -1,0 +1,50 @@
+<h1 class="text-center mb-4">{{pageTitle}}</h1>
+<div class="container d-flex justify-content-center">
+  <div class="row">
+    <div class="mb-3">
+      <label for="naziv" class="form-label">Naziv</label>
+      <input type="text" class="form-control" id="naziv" [(ngModel)]="rok.naziv">
+    </div>
+    <div class="col-6">
+      <label for="pocetak" class="form-label">Početak</label>
+      <br>
+      <div class="input-group">
+        <input
+          id="pocetak"
+          class="form-control"
+          placeholder="yyyy-mm-dd"
+          name="pocetak"
+          [(ngModel)]="rok.pocetak"
+          ngbDatepicker
+          #pocetak="ngbDatepicker"
+        />
+        <button class="btn btn-outline-secondary bi bi-calendar3" (click)="pocetak.toggle()" type="button">
+          <i class="fas fa-calendar"></i>
+        </button>
+      </div>
+    </div>
+    <div class="col-6">
+      <label for="kraj" class="form-label">Kraj</label>
+      <br>
+      <div class="input-group">
+        <input
+          id="kraj"
+          class="form-control"
+          placeholder="yyyy-mm-dd"
+          name="kraj"
+          [(ngModel)]="rok.kraj"
+          ngbDatepicker
+          #kraj="ngbDatepicker"
+        />
+        <button class="btn btn-outline-secondary" (click)="kraj.toggle()" type="button">
+          <i class="fas fa-calendar"></i>
+        </button>
+      </div>
+    </div>
+    <div class="row my-3">
+      <div class="col-auto">
+        <button class="btn btn-primary" (click)="save()">Sačuvaj</button>
+      </div>
+    </div>
+  </div>
+</div>

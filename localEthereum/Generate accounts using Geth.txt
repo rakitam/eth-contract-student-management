@@ -1,0 +1,104 @@
+1. Pravimo novi account preko Clef-a (account je private/public par kljuceva)
+
+2. Prosledjujemo lokaciju gde cemo cuvati keystore-ove 
+C:\Users\Rakitica\Desktop\Diplomski ajmo\eObrazovanje\backend\src\main\resources\ethereum\chaindata\keystore
+3. Unesem password, generisao mi se account 
+0x1d7a9eE3c141C4Ee2Fdc7a0f5eCCDf97F7eDe4F8 (Sifra Sirobacilim1993 logicno)
+
+4. Uradim isto, generisem jos 1 account
+0x195b0dAAC37D7b03c033A16B156F630C64Cd1B5a (Sifra Sirobacilim1993 logicno)
+
+5. Pokrenem clef u jednom cmd 
+clef --keystore ./keystore --configdir ./clef --chainid 10
+
+6. Stavim account-ove u genesis.json
+
+7. Inicijalizacija sa genesis.json
+geth --datadir=./chaindata/ init ./genesis.json
+
+8. Pokrecem svoj privatni cvor lokalno s ovim argumentima, i pointujem na clef
+geth --datadir ./chaindata --http --http.api eth,net --signer=//./pipe/clef.ipc --networkid 10 --console
+geth --datadir ./chaindata --http --http.corsdomain "chrome-extension://nkbihfbeogaeaoehlefnkodbefgpgknn/home.html" --http.api web3,eth,debug,personal,net --ws --ws.api web3,eth,debug,personal,net --vmdebug --signer=//./pipe/clef.ipc --networkid 10 console
+
+7. Posaljem prazan http request na server svog lokalnog Ethereum cvora (Geth), i tako proverim da je
+server responsive
+curl http://localhost:8545
+curl: command-line tool za pravljenje http requestova
+! Za ovu proveru otvori novi cmd, ako nema greske, sve kul
+
+8. Importujem accountove na meta mask preko PK
+account extract --keyfile ./keystore/UTC--2023-11-15T14-32-10.801051100Z--1d7a9ee3c141c4ee2fdc7a0f5eccdf97f7ede4f8 --password Sirobacilim1993
+
+https://dev.to/blockchain_dev/getting-started-with-ethereum-connecting-geth-remix-and-metamask-for-local-development-ce1
+
+geth --datadir ./chaindata --http --http.corsdomain "chrome-extension://nkbihfbeogaeaoehlefnkodbefgpgknn/home.html" --http.api web3,eth,debug,personal,net --ws --ws.api web3,eth,debug,personal,net --vmdebug --signer=//./pipe/clef.ipc --networkid 10 console
+
+PRAVIM NOVI ACCOUNT PREKO GETH (bez clef-a), OVO RADI POSO, CLEF JE ZA PRODUKCIJSKA OKRUZENJA!!!
+Mozes odvojenu konzolu da imas za geth i za pokretanje cvora
+geth attach http://127.0.0.1:8545
+
+geth --datadir ./chaindata account new
+geth --datadir=./chaindata/ init ./genesis.json
+
+!!!Account unlocking disabled with --http!!!
+geth --datadir ./chaindata --http --http.corsdomain "chrome-extension://nkbihfbeogaeaoehlefnkodbefgpgknn/home.html" --http.api web3,eth,debug,personal,net --ws --ws.api web3,eth,debug,personal,net --vmdebug --networkid 10 --miner.gasprice 1 console
+
+!!!Da omogucim otkljucavanje!!!
+geth --datadir ./chaindata --http --http.corsdomain "chrome-extension://nkbihfbeogaeaoehlefnkodbefgpgknn/home.html" --http.api web3,eth,debug,personal,net --ws --ws.api web3,eth,debug,personal,net --vmdebug --networkid 10 --miner.gasprice 1 --allow-insecure-unlock console
+
+!!!Sa mining modom!!!
+geth --datadir ./chaindata --http --http.corsdomain "chrome-extension://nkbihfbeogaeaoehlefnkodbefgpgknn/home.html" --http.api web3,eth,debug,personal,miner,net --ws --ws.api web3,eth,debug,personal,net --vmdebug --networkid 10 --miner.gasprice 1 --allow-insecure-unlock --unlock "0x3134961a3100950857b9da622c992e0efddeb406" console
+
+!!!Samo sta mi treba za transakciju!!!
+geth --datadir ./chaindata --http --http.api web3,eth,debug,personal,miner,net --ws --ws.api web3,eth,debug,personal,net --vmdebug --networkid 10 --miner.etherbase "0x2910574Bdf1895fDf0E558Fd023fD61b3de68cA3" --miner.gasprice 1 --allow-insecure-unlock --unlock "0x2910574Bdf1895fDf0E558Fd023fD61b3de68cA3" --password ./password.txt console
+
+SALJEM PARE PREKO KONZOLE
+eth.accounts, eth.coinbase mogu tek kad sam pokrenula server
+1. Account sa kog saljemo mora biti otkljucan
+web3.personal.unlockAccount("0x13Ca4181D5012101856eF5c5963174161db7Ef2A","Sirobacilim1993", 15000)
+
+Provera da li je otkljucan
+web3.personal.listAccounts.includes('0x13Ca4181D5012101856eF5c5963174161db7Ef2A')
+
+2. Saljemo kes
+eth.sendTransaction({
+  from: '0x2910574Bdf1895fDf0E558Fd023fD61b3de68cA3', to: '0xCbAf0dAf5081557F0ccC9226a8226A1389D36c08', value: web3.toWei(0.1, 'ether'), gasPrice: web3.toWei(1, 'gwei')
+});
+
+3. Ako je zeleni string, izgleda da je poslato
+
+4. Proverimo detalje transakcije sa 
+eth.getTransaction('0x7ab94932ba876344c9591d9232304d1e843ff426ac9fa22e0a268133b55f2edf')
+eth.getTransaction('0x29ec4af9bdea78f73901b50ed6d633473ced3fd3f1ab1d85191775551176aaa7')
+eth.getTransaction('0xc742df42c22922bb3151401ef1c339c0de033257013109d221c90baacd71f14d')
+eth.getTransaction('0x57d2f8160f4d2b10e5510484a64598180fc7f031ff6265249cacc7eea6a5dc8b')
+eth.getTransaction('0x174402946510fb753dff8c65ab366650c01408aad87d575e38e7df610b047d8e')
+
+NAKON STO SMO POSLALI TRANSAKCIJU MORAMO MINE-OVATI
+
+miner.start()
+
+5. Kad je napravljena transakcija, zelimo da se upise u blok, tako da moramo da startujemo mining komandom miner.start()
+!!!TRANSAKCIJA MORA BITI KREIRANA DOK JE CVOR U MINING MODU INACE MORA PONOVO DA SE EMITUJE!!! (kada radimo sa ethernal)
+U genesis.json stavimo samo 1 account i njega krknemo u extraData izmedju nula!
+miner.setEtherbase('0x3134961a3100950857b9da622c992e0efddeb406')
+Provera da li je otkljucan
+web3.personal.listAccounts.includes('0x3134961a3100950857b9da622c992e0efddeb406')
+
+6. Otkljucamo etherbase
+web3.personal.unlockAccount("0x3134961a3100950857b9da622c992e0efddeb406", "Sirobacilim1993", 15000)
+Provera da li je otkljucan
+web3.personal.listAccounts.includes('0x3134961a3100950857b9da622c992e0efddeb406')
+
+ako zaboravim da set etherbase, ide miner.setEtherbase("accountnumber")
+
+IDEMO LAPTOP
+0x2910574Bdf1895fDf0E558Fd023fD61b3de68cA3 -- COINBASE
+0xCbAf0dAf5081557F0ccC9226a8226A1389D36c08 -- DRUGI ACC
+
+eth.getBalance("0x2910574Bdf1895fDf0E558Fd023fD61b3de68cA3")
+eth.getBalance("0xCbAf0dAf5081557F0ccC9226a8226A1389D36c08")
+
+eth.accounts
+
+

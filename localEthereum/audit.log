@@ -1,0 +1,36 @@
+t=2023-11-15T15:36:34+0100 lvl=info msg=Configured api=signer "audit log"=audit.log
+t=2023-11-15T15:44:02+0100 lvl=info msg=Configured api=signer "audit log"=audit.log
+t=2023-11-15T15:52:37+0100 lvl=info msg=Version    api=signer type=request metadata="{\"remote\":\"NA\",\"local\":\"NA\",\"scheme\":\"ipc\",\"User-Agent\":\"\",\"Origin\":\"\"}"
+t=2023-11-15T15:52:37+0100 lvl=info msg=Version    api=signer type=response data=6.1.0 error=nil
+t=2023-11-15T15:54:11+0100 lvl=info msg=Version    api=signer type=request  metadata="{\"remote\":\"NA\",\"local\":\"NA\",\"scheme\":\"ipc\",\"User-Agent\":\"\",\"Origin\":\"\"}"
+t=2023-11-15T15:54:11+0100 lvl=info msg=Version    api=signer type=response data=6.1.0 error=nil
+t=2023-11-15T15:56:21+0100 lvl=info msg=Version    api=signer type=request  metadata="{\"remote\":\"NA\",\"local\":\"NA\",\"scheme\":\"ipc\",\"User-Agent\":\"\",\"Origin\":\"\"}"
+t=2023-11-15T15:56:21+0100 lvl=info msg=Version    api=signer type=response data=6.1.0 error=nil
+t=2023-11-15T16:03:19+0100 lvl=info msg=Version    api=signer type=request  metadata="{\"remote\":\"NA\",\"local\":\"NA\",\"scheme\":\"ipc\",\"User-Agent\":\"\",\"Origin\":\"\"}"
+t=2023-11-15T16:03:19+0100 lvl=info msg=Version    api=signer type=response data=6.1.0 error=nil
+t=2023-11-15T16:12:33+0100 lvl=info msg=Version    api=signer type=request  metadata="{\"remote\":\"NA\",\"local\":\"NA\",\"scheme\":\"ipc\",\"User-Agent\":\"\",\"Origin\":\"\"}"
+t=2023-11-15T16:12:33+0100 lvl=info msg=Version    api=signer type=response data=6.1.0 error=nil
+t=2023-11-15T16:13:40+0100 lvl=info msg=Version    api=signer type=request  metadata="{\"remote\":\"NA\",\"local\":\"NA\",\"scheme\":\"ipc\",\"User-Agent\":\"\",\"Origin\":\"\"}"
+t=2023-11-15T16:13:40+0100 lvl=info msg=Version    api=signer type=response data=6.1.0 error=nil
+t=2023-11-15T16:14:28+0100 lvl=info msg=Version    api=signer type=request  metadata="{\"remote\":\"NA\",\"local\":\"NA\",\"scheme\":\"ipc\",\"User-Agent\":\"\",\"Origin\":\"\"}"
+t=2023-11-15T16:14:28+0100 lvl=info msg=Version    api=signer type=response data=6.1.0 error=nil
+t=2023-11-15T16:32:47+0100 lvl=info msg=Version    api=signer type=request  metadata="{\"remote\":\"NA\",\"local\":\"NA\",\"scheme\":\"ipc\",\"User-Agent\":\"\",\"Origin\":\"\"}"
+t=2023-11-15T16:32:47+0100 lvl=info msg=Version    api=signer type=response data=6.1.0 error=nil
+t=2023-11-15T16:36:30+0100 lvl=info msg=Version    api=signer type=request  metadata="{\"remote\":\"NA\",\"local\":\"NA\",\"scheme\":\"ipc\",\"User-Agent\":\"\",\"Origin\":\"\"}"
+t=2023-11-15T16:36:30+0100 lvl=info msg=Version    api=signer type=response data=6.1.0 error=nil
+t=2023-11-15T16:52:34+0100 lvl=info msg=Version    api=signer type=request  metadata="{\"remote\":\"NA\",\"local\":\"NA\",\"scheme\":\"ipc\",\"User-Agent\":\"\",\"Origin\":\"\"}"
+t=2023-11-15T16:52:34+0100 lvl=info msg=Version    api=signer type=response data=6.1.0 error=nil
+t=2023-11-15T17:01:46+0100 lvl=info msg=Configured api=signer "audit log"=audit.log
+t=2023-11-15T17:04:26+0100 lvl=info msg=Version    api=signer type=request metadata="{\"remote\":\"NA\",\"local\":\"NA\",\"scheme\":\"ipc\",\"User-Agent\":\"\",\"Origin\":\"\"}"
+t=2023-11-15T17:04:26+0100 lvl=info msg=Version    api=signer type=response data=6.1.0 error=nil
+t=2023-11-15T17:06:53+0100 lvl=info msg=Version    api=signer type=request  metadata="{\"remote\":\"NA\",\"local\":\"NA\",\"scheme\":\"ipc\",\"User-Agent\":\"\",\"Origin\":\"\"}"
+t=2023-11-15T17:06:53+0100 lvl=info msg=Version    api=signer type=response data=6.1.0 error=nil
+t=2023-11-15T17:07:25+0100 lvl=info msg=Version    api=signer type=request  metadata="{\"remote\":\"NA\",\"local\":\"NA\",\"scheme\":\"ipc\",\"User-Agent\":\"\",\"Origin\":\"\"}"
+t=2023-11-15T17:07:25+0100 lvl=info msg=Version    api=signer type=response data=6.1.0 error=nil
+t=2023-11-15T17:08:45+0100 lvl=info msg=List       api=signer type=request  metadata="{\"remote\":\"NA\",\"local\":\"NA\",\"scheme\":\"ipc\",\"User-Agent\":\"\",\"Origin\":\"\"}"
+t=2023-11-15T17:13:00+0100 lvl=info msg=List       api=signer type=response data="[0x1d7a9eE3c141C4Ee2Fdc7a0f5eCCDf97F7eDe4F8 0x195b0dAAC37D7b03c033A16B156F630C64Cd1B5a]"
+t=2023-11-15T17:13:32+0100 lvl=info msg=Configured api=signer "audit log"=audit.log
+t=2023-11-15T17:16:46+0100 lvl=info msg=Version    api=signer type=request metadata="{\"remote\":\"NA\",\"local\":\"NA\",\"scheme\":\"ipc\",\"User-Agent\":\"\",\"Origin\":\"\"}"
+t=2023-11-15T17:16:46+0100 lvl=info msg=Version    api=signer type=response data=6.1.0 error=nil
+t=2023-11-15T17:16:53+0100 lvl=info msg=List       api=signer type=request  metadata="{\"remote\":\"NA\",\"local\":\"NA\",\"scheme\":\"ipc\",\"User-Agent\":\"\",\"Origin\":\"\"}"
+t=2023-11-15T17:16:57+0100 lvl=info msg=List       api=signer type=response data="[0x1d7a9eE3c141C4Ee2Fdc7a0f5eCCDf97F7eDe4F8 0x195b0dAAC37D7b03c033A16B156F630C64Cd1B5a]"

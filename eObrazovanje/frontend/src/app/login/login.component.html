@@ -1,0 +1,18 @@
+<div class="login-container container-fluid d-flex justify-content-center align-items-center">
+  <div class="login-form">
+    <h1>Studentska služba</h1>
+    <div class="logo">
+      <img src="assets/logo.png" alt="Logo" class="w-50">
+    </div>
+    <div class="mb-3">
+      <label for="username" class="form-label">Korisničko ime</label>
+      <input type="text" class="form-control" id="username" [(ngModel)]="user.username">
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Lozinka</label>
+      <input type="password" class="form-control" id="password" [(ngModel)]="user.password">
+    </div>
+
+    <button type="submit" class="btn btn-primary" (click)="login()">Prijava</button>
+  </div>
+</div>

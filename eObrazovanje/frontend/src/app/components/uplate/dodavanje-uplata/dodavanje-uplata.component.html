@@ -1,0 +1,41 @@
+<h1 class="text-center mb-4">Nova uplata</h1>
+<div class="container d-flex justify-content-center">
+  <div>
+    <div class="mb-3">
+      <label for="student">Student</label>
+      <select class="form-select" id="student" [(ngModel)]="uplata.student" [compareWith]="compareWithId">
+        <option [ngValue]="null">Odaberi</option>
+        <option *ngFor="let student of studenti" [ngValue]="student">{{student.ime}} {{student.prezime}} ({{student?.brojIndeksa}})</option>
+      </select>
+    </div>
+
+
+    <div class="mb-3">
+      <label for="iznos" class="form-label">Iznos</label>
+      <input [min]="1" type="number" class="form-control" id="iznos" [(ngModel)]="uplata.iznos">
+    </div>
+
+    <div class="mb-3">
+      <label for="datum" class="form-label">Datum</label>
+      <br>
+      <div class="input-group">
+        <input
+          id="datum"
+          class="form-control"
+          placeholder="yyyy-mm-dd"
+          name="datum"
+          [(ngModel)]="uplata.datum"
+          ngbDatepicker
+          #datum="ngbDatepicker"
+        />
+        <button class="btn btn-outline-secondary bi bi-calendar3" (click)="datum.toggle()" type="button">
+          <i class="fas fa-calendar"></i>
+        </button>
+      </div>
+    </div>
+
+    <div>
+      <button class="btn btn-primary" (click)="save()">Sačuvaj</button>
+    </div>
+  </div>
+</div>

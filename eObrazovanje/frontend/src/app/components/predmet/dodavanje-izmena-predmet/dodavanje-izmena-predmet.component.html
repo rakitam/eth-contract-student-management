@@ -1,0 +1,21 @@
+<h1 class="text-center mb-4">{{pageTitle}}</h1>
+<div class="container d-flex justify-content-center">
+  <div class="row">
+    <div class="mb-3">
+      <label for="naziv" class="form-label">Naziv</label>
+      <input type="text" class="form-control" id="naziv" [(ngModel)]="predmet.naziv">
+    </div>
+    <div class="mb-3">
+      <label for="oznaka" class="form-label">Oznaka</label>
+      <input type="text" class="form-control" id="oznaka" [(ngModel)]="predmet.oznaka">
+    </div>
+    <div class="mb-3">
+      <label for="espb" class="form-label">ESPB</label>
+      <input type="number" class="form-control" id="espb" [(ngModel)]="predmet.espb">
+    </div>
+
+    <div>
+      <button class="btn btn-primary" (click)="save()">Sačuvaj</button>
+    </div>
+  </div>
+</div>

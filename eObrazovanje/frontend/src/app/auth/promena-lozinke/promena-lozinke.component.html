@@ -1,0 +1,16 @@
+<div class="password-change-container container-fluid d-flex flex-column align-items-center justify-content-center" style="background-color: #f5f5f5;">
+  <h1 class="text-center mb-4">Promena lozinke</h1>
+  <div class="card p-4" style="max-width: 400px;">
+    <div class="mb-3">
+      <label for="password" class="form-label">Lozinka</label>
+      <input type="password" class="form-control" id="password" [(ngModel)]="lozinka.password">
+    </div>
+
+    <div class="mb-3">
+      <label for="repeat-password" class="form-label">Ponovljena lozinka</label>
+      <input type="password" class="form-control" id="repeat-password" [(ngModel)]="lozinka.repeatPassword">
+    </div>
+
+    <button type="submit" class="btn btn-primary" (click)="promeni()">Promeni</button>
+  </div>
+</div>

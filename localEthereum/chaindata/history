@@ -1,0 +1,18 @@
+eth.accounts
+eth.coinbase
+miner.setEtherbase("0x2910574Bdf1895fDf0E558Fd023fD61b3de68cA3")
+eth.sendTransaction({
+  from: '0x2910574Bdf1895fDf0E558Fd023fD61b3de68cA3', to: '0xCbAf0dAf5081557F0ccC9226a8226A1389D36c08', value: web3.toWei(0.1, 'ether'), gasPrice: web3.toWei(1, 'gwei')
+});
+miner.start()
+eth.accounts
+eth.getTransaction('0x7ab94932ba876344c9591d9232304d1e843ff426ac9fa22e0a268133b55f2edf')
+eth.getBalance("0x2910574Bdf1895fDf0E558Fd023fD61b3de68cA3")
+eth.getBalance("0xCbAf0dAf5081557F0ccC9226a8226A1389D36c08")
+eth.accounts
+eth.getTransaction('0x7ab94932ba876344c9591d9232304d1e843ff426ac9fa22e0a268133b55f2edf')
+eth.getTransaction('0x29ec4af9bdea78f73901b50ed6d633473ced3fd3f1ab1d85191775551176aaa7')
+eth.sendTransaction({
+  from: '0x2910574Bdf1895fDf0E558Fd023fD61b3de68cA3', to: '0xCbAf0dAf5081557F0ccC9226a8226A1389D36c08', value: web3.toWei(0.1, 'ether'), gasPrice: web3.toWei(1, 'gwei')
+});
+miner.start()

@@ -1,0 +1,52 @@
+<div class="container my-page-container student-page-container">
+  <h1 class="text-center mb-4">Studenti</h1>
+  <div class="row">
+    <div class="col-md-8">
+      <button class="btn btn-primary" routerLink="/student-dodavanje">Dodavanje</button>
+    </div>
+    <div class="col-md-4 text-right">
+      <input type="text" class="form-control" [(ngModel)]="params.search" (keyup)="ucitavanjeStudenata(0)"
+             placeholder="Pretraga">
+    </div>
+  </div>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>#</th>
+      <th (click)="sort('username')">Username<app-sort column="username" [params]="params"></app-sort></th>
+      <th (click)="sort('ime')">Ime<app-sort column="ime" [params]="params"></app-sort></th>
+      <th (click)="sort('prezime')">Prezime<app-sort column="prezime" [params]="params"></app-sort></th>
+      <th (click)="sort('brojIndeksa')">Broj indeksa<app-sort column="brojIndeksa" [params]="params"></app-sort></th>
+      <th (click)="sort('jmbg')">JMBG<app-sort column="jmbg" [params]="params"></app-sort></th>
+      <th (click)="sort('adresa')">Adresa<app-sort column="adresa" [params]="params"></app-sort></th>
+      <th (click)="sort('tekuciRacun')">Tekuci racun<app-sort column="tekuciRacun" [params]="params"></app-sort></th>
+      <th (click)="sort('stanje')">Stanje<app-sort column="stanje" [params]="params"></app-sort></th>
+      <th></th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let student of studenti">
+      <td>{{student.id}}</td>
+      <td>
+        <a [routerLink]="['/profile', student.username]">{{student.username}}</a>
+      </td>
+      <td>{{student.ime}}</td>
+      <td>{{student.prezime}}</td>
+      <td>{{student.brojIndeksa}}</td>
+      <td>{{student.jmbg}}</td>
+      <td>{{student.adresa}}</td>
+      <td>{{student.tekuciRacun}}</td>
+      <td>{{student.stanje}}</td>
+      <td>
+        <button class="btn btn-warning" [routerLink]="['/studenti', student.username]">Izmena</button>
+        &nbsp;
+        <button class="btn btn-danger" *ngIf="utils.hasAnyRole(['ADMIN'])" (click)="brisanjeStudenta(student.id)">Brisanje</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <div class="d-flex justify-content-end">
+    <ngb-pagination [collectionSize]="totalCount" [page]="params.page+1" [pageSize]="params.size" (pageChange)="ucitavanjeStudenata($event-1)"></ngb-pagination>
+  </div>
+</div>

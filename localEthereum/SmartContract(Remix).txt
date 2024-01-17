@@ -1,0 +1,45 @@
+1. Napisem pametni ugovor u remixu 
+2. Compile-ujem ga
+3. Nakon toga se generisu contractByteCode i contractABI koji mi trebaju za deployment skriptu
+ - Uglavnom su to imeUgovora.json fajlovi na remixu
+NA REMIXU SE DIPLOJUJE DIREKT NA ETHEREUM, REMIX KORISTIM ZA KOMPILACIJU, DEPLOYMENT RADIM LOKALNO
+4. Skinem kompajlirane fajlove sa remixa, i skinem solidity compiler npm install solc
+6. U deployment skripti mi treba konekcija ka mom lokalnom ethereum cvoru i bytecode i ABI ugovora
+7. Promenim dakle putanju do mesta de su mi abi i bytecode
+8. Kad skinem EObrazovanje.json sa Remixa, u njemu nadjem abi i bytecode koji mi trebaju za deployment:
+
+ 
+
+9. Ako mi json fajl sadrzi abi i bin ne moram da ga pisem direktno u skriptu za diploj
+
+PROBAMO PREKO SOLC kao sa clanka:
+
+1. Napisala ugovor na remixu
+2. Download-ovala i instalirala solc cmd, i extract solidity zip sa gita
+3. npm install -g solc
+
+mozda hardhat
+
+1. npx hardhat init za inicijalizaciju hardhat projekta
+2. Stavim ugovor u contracts folder
+3. npx hardhat compile
+4. abi i bin se cuvaju u artifact folderu
+
+MOZE HARDHAT!!!
+
+0x5FbDB2315678afecb367f032d93F642f64180aa3 -- na hardhat mrezi ugovor
+0x2910574Bdf1895fDf0E558Fd023fD61b3de68cA3 -- OVO JE LOCAL ACCOUNT NOVI
+0x9c991C4802B107f696e3fE99505F1b0c2140DeA4 -- EVO GA UGOVOR NA GETH!!!
+0x5D0372feC37f39012851aAeB9F1E515de3E97C1c -- NOVI UGOVOR NA GETH!!
+https://www.youtube.com/watch?v=dgdTyTl2Z18&ab_channel=Alchemy PRATILA OVAJ KLIP ALI SA TYPESCRIPT
+Pratiti fajlove, nikako ne smem imati 2 config.js, budu u konfliktu
+
+ide npx hardhat init (npx hardhat deprecated)
+npx hardhat run scripts/deploy.ts --network localhost
+
+https://app.tryethernal.com
+
+1. Importujem contract kao fajl
+2. Odem na contract
+3. Stavim naziv ugovora i upload-ujem iz artifacts foldera generisani .json file (od strane hardhata) koji sadrzi contractName i abi polja
+

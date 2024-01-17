@@ -1,0 +1,29 @@
+<h1 class="text-center mb-4">{{pageTitle}}</h1>
+<div class="container d-flex justify-content-center">
+  <div>
+    <div class="mb-3">
+      <label for="username" class="form-label">Username</label>
+      <input type="text" class="form-control" id="username" [(ngModel)]="nastavnik.username">
+    </div>
+    <div class="mb-3">
+      <label for="ime" class="form-label">Ime</label>
+      <input type="text" class="form-control" id="ime" [(ngModel)]="nastavnik.ime">
+    </div>
+    <div class="mb-3">
+      <label for="prezime" class="form-label">Prezime</label>
+      <input type="text" class="form-control" id="prezime" [(ngModel)]="nastavnik.prezime">
+    </div>
+    <div class="mb-3">
+      <label for="jmbg" class="form-label">JMBG</label>
+      <input type="text" minlength="13" maxlength="13" class="form-control" id="jmbg" [disabled]="isDisabled" [(ngModel)]="nastavnik.jmbg">
+    </div>
+    <div class="mb-3">
+      <label for="adresa" class="form-label">Adresa</label>
+      <input type="text" class="form-control" id="adresa" [(ngModel)]="nastavnik.adresa">
+    </div>
+
+    <div>
+      <button class="btn btn-primary" (click)="save()">Sačuvaj</button>
+    </div>
+  </div>
+</div>

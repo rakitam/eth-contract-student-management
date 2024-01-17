@@ -1,0 +1,41 @@
+<h1 class="text-center mb-4">{{pageTitle}}</h1>
+<div class="container d-flex justify-content-center">
+  <div>
+    <div class="mb-3">
+      <label for="username" class="form-label">Username</label>
+      <input type="text" class="form-control" id="username" [(ngModel)]="student.username">
+    </div>
+    <div class="mb-3">
+      <label for="ime" class="form-label">Ime</label>
+      <input type="text" class="form-control" id="ime" [(ngModel)]="student.ime">
+    </div>
+    <div class="mb-3">
+      <label for="prezime" class="form-label">Prezime</label>
+      <input type="text" class="form-control" id="prezime" [(ngModel)]="student.prezime">
+    </div>
+    <div class="mb-3">
+      <label for="brojIndeksa" class="form-label">Broj Indeksa</label>
+      <input type="text" class="form-control" id="brojIndeksa" [disabled]="isDisabled" [(ngModel)]="student.brojIndeksa">
+    </div>
+    <div class="mb-3">
+      <label for="jmbg" class="form-label">JMBG</label>
+      <input type="text" minlength="13" maxlength="13" class="form-control" id="jmbg" [disabled]="isDisabled" [(ngModel)]="student.jmbg">
+    </div>
+    <div class="mb-3">
+      <label for="adresa" class="form-label">Adresa</label>
+      <input type="text" class="form-control" id="adresa" [(ngModel)]="student.adresa">
+    </div>
+    <div class="mb-3">
+      <label for="brojTelefona" class="form-label">Broj Telefona</label>
+      <input type="text" minlength="9" maxlength="10" class="form-control" id="brojTelefona" [(ngModel)]="student.brojTelefona">
+    </div>
+    <div class="mb-3">
+      <label for="tekuciRacun" class="form-label">Tekuci racun</label>
+      <input type="text" class="form-control" id="tekuciRacun" [(ngModel)]="student.tekuciRacun">
+    </div>
+
+    <div>
+      <button class="btn btn-primary" (click)="save()">Sačuvaj</button>
+    </div>
+  </div>
+</div>

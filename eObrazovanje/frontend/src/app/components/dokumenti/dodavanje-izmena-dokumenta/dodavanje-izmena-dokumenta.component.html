@@ -1,0 +1,25 @@
+<h1 class="text-center mb-4">{{pageTitle}}</h1>
+<div class="container d-flex justify-content-center">
+  <div>
+    <div class="mb-3" *ngIf="utils.hasAnyRole(['ADMIN'])">
+      <label for="student">Student</label>
+      <select [disabled]="isDisabled" class="form-select" id="student" [(ngModel)]="dokument.student" [compareWith]="compareWithId">
+        <option [ngValue]="null">Odaberi</option>
+        <option *ngFor="let student of studenti" [ngValue]="student">{{student.ime}} {{student.prezime}} ({{student?.brojIndeksa}})</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label for="naziv" class="form-label">Naziv</label>
+      <input type="text" class="form-control" id="naziv" [(ngModel)]="dokument.naziv">
+    </div>
+
+    <div class="mb-3">
+      <label for="dokument" class="form-label">Dokument</label>
+      <input class="form-control" type="file" id="dokument" (change)="onFileChange($event)">
+    </div>
+    <div>
+      <button class="btn btn-primary" (click)="save()">Sačuvaj</button>
+    </div>
+  </div>
+</div>

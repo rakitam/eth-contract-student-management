@@ -1,0 +1,47 @@
+<div class="container my-page-container">
+  <h1 class="text-center mb-4">Ispiti</h1>
+  <div class="row">
+    <div class="col-md-8">
+      <button class="btn btn-primary" *ngIf="utils.hasAnyRole(['ADMIN'])" [routerLink]="getDodavanjeLink()">Dodavanje</button>
+    </div>
+    <div class="col-md-4 text-right">
+      <input type="text" class="form-control" [(ngModel)]="params.search" (keyup)="ucitavanjeIspita(0)"
+             placeholder="Pretraga">
+    </div>
+  </div>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>#</th>
+      <th (click)="sort('predaje.predmet')">Predmet<app-sort column="predaje.predmet" [params]="params"></app-sort></th>
+      <th (click)="sort('predaje')">Nastavnik (Zvanje)<app-sort column="predaje" [params]="params"></app-sort></th>
+      <th (click)="sort('student')">Student<app-sort column="student" [params]="params"></app-sort></th>
+      <th (click)="sort('bodovi')">Bodovi<app-sort column="bodovi" [params]="params"></app-sort></th>
+      <th (click)="sort('datum')">Datum<app-sort column="datum" [params]="params"></app-sort></th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let ispit of ispiti">
+      <td>{{ispit.id}}</td>
+      <td>{{ispit.predaje?.predmet?.naziv}}</td>
+      <td>{{ispit.predaje?.nastavnik?.ime}} {{ispit.predaje?.nastavnik?.prezime}} ({{ispit.predaje?.zvanje?.naziv}})</td>
+      <td>{{ispit.student?.ime}} {{ispit.student?.prezime}}</td>
+      <td>{{ispit.bodovi}}</td>
+      <td>{{ispit.datum}}</td>
+      <td>
+<!--        <button class="btn btn-warning" *ngIf="utils.hasAnyRole(['ADMIN'])" [routerLink]="['/ispiti', ispit.id]" [hidden]="ispit.konacno">Izmena</button>-->
+        <button class="btn btn-warning" *ngIf="utils.hasAnyRole(['ADMIN'])"
+                [routerLink]="getEditLink(ispit.id)"
+                [hidden]="ispit.konacno">
+          Izmena
+        </button>
+        <i class="fas fa-check" [hidden]="!ispit.konacno"></i>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <div class="d-flex justify-content-end">
+    <ngb-pagination [collectionSize]="totalCount" [page]="params.page+1" [pageSize]="params.size" (pageChange)="ucitavanjeIspita($event-1)"></ngb-pagination>
+  </div>
+</div>

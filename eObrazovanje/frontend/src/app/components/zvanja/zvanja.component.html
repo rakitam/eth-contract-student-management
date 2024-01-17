@@ -1,0 +1,24 @@
+<div class="container my-page-container">
+  <h1 class="text-center mb-4">Zvanja</h1>
+  <button class="btn btn-primary" routerLink="/zvanje-dodavanje">Dodavanje</button>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>Naziv</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let zvanje of zvanja">
+      <td>{{zvanje.id}}</td>
+      <td>{{zvanje.naziv}}</td>
+      <td>
+        <button class="btn btn-warning" [routerLink]="['/zvanja', zvanje.id]">Izmena</button>
+        &nbsp;
+        <button class="btn btn-danger" (click)="brisanjeZvanja(zvanje.id)">Brisanje</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

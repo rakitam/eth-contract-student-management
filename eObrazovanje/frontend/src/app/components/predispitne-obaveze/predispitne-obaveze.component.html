@@ -1,0 +1,33 @@
+<div class="container my-page-container">
+  <h1 class="text-center mb-4">Predispitne obaveze iz predmeta</h1>
+  <button class="btn btn-primary" routerLink="/predispitne-obaveze-dodavanje">Dodavanje</button>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>Predmet</th>
+      <th>Naziv</th>
+      <th>Tip</th>
+      <th>Minimalni broj bodova</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let predispitnaObaveza of predispitneObaveze">
+      <td>{{predispitnaObaveza.id}}</td>
+      <td>{{predispitnaObaveza.predmet?.naziv}}</td>
+      <td>{{predispitnaObaveza.tip}}</td>
+      <td>{{predispitnaObaveza.naziv}}</td>
+      <td>{{predispitnaObaveza.minBodova}}</td>
+      <td>
+        <button class="btn btn-warning" [routerLink]="['/predispitne-obaveze', predispitnaObaveza.id]">Izmena</button>
+        &nbsp;
+        <button class="btn btn-danger" (click)="brisanjePredispitneObaveze(predispitnaObaveza.id)">Brisanje</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <div class="d-flex justify-content-end">
+    <ngb-pagination [collectionSize]="totalCount" [page]="pageable.page+1" [pageSize]="pageable.size" (pageChange)="ucitavanjePredispitnaObaveza($event-1)"></ngb-pagination>
+  </div>
+</div>
