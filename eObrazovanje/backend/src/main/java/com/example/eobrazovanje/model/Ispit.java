@@ -1,8 +1,13 @@
 package com.example.eobrazovanje.model;
 
 import lombok.Data;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+import org.springframework.context.annotation.Lazy;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
@@ -16,11 +21,11 @@ public class Ispit {
     @Column(nullable = false)
     LocalDate datum;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "predaje_id", nullable = false)
     Predaje predaje;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "student_id", nullable = false)
     Student student;
 
@@ -30,7 +35,7 @@ public class Ispit {
     @Column(nullable = false)
     Boolean konacno;
 
-    @OneToOne(mappedBy = "ispit", optional = false)
+    @OneToOne(mappedBy = "ispit", optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "prijava_id", nullable = false)
     Prijava prijava;
 

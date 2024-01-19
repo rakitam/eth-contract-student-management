@@ -11,6 +11,6 @@ export class EthereumService {
   constructor(private http: HttpClient) {}
 
   triggerTransaction(data: any): Observable<string> {
-    return this.http.post<string>(`${this.url}/trigger-transaction`, data);
+    return this.http.post(`${this.url}/trigger-transaction`, data, {responseType: "text"});
   }
 }

@@ -53,8 +53,10 @@ public class IspitController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<IspitDto> getOne(@PathVariable Long id) {
-        Optional<Ispit> ispit = ispitService.getOne(id);
+    public ResponseEntity<IspitDto> getOne(@PathVariable String id) {
+        System.out.println("Entry data: " + id);
+        Optional<Ispit> ispit = ispitService.getOne(Long.valueOf(id));
+        System.out.println("Result: " + ispit.isPresent());
         if(!ispit.isPresent()) {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }

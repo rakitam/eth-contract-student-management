@@ -140,20 +140,25 @@ export class IzmenaIspitaComponent {
     this.ethereumService.triggerTransaction(ethereumData).subscribe(
       (transactionHash) => {
         console.log('Transaction triggered successfully.');
+        const ethernalLink = `https://app.tryethernal.com/transaction/${transactionHash}`;
+        const alertMessage = `Ethereum transakcija uspesno izvrsena.\n\nDetalji transakcije:\n${ethernalLink}`;
+        alert(alertMessage);
         //this.showAlert('Ethereum transakcija uspesno izvrsena.', transactionHash);
       },
       (error) => {
         console.error('Error triggering transaction:', error);
+        const errorMessage = 'Doslo je do greske pri izvrsavanju transakcije.\n\nDetalji transakcije:';
+        alert(errorMessage);
         //this.showAlert('Doslo je do greske pri izvrsavanju transakcije.', '');
       }
     );
   }
 
-  // private showAlert(message: string, transactionHash: string): void {
-  //   const ethernalLink = `https://app.tryethernal.com/transaction/${transactionHash}`;
-  //   const alertMessage = `${message}\n\nDetalji transakcije:\n${ethernalLink}`;
-  //   alert(alertMessage);
-  // }
+  private showAlert(message: string, transactionHash: string): void {
+    const ethernalLink = `https://app.tryethernal.com/transaction/${transactionHash}`;
+    const alertMessage = `${message}\n\nDetalji transakcije:\n${ethernalLink}`;
+    alert(alertMessage);
+  }
 
   compareWithId(o1: any, o2: any) {
     return o1?.id === o2?.id

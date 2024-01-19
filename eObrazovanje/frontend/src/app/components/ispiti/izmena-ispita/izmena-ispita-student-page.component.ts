@@ -160,11 +160,11 @@ export class IzmenaIspitaStudentPageComponent {
     this.ethereumService.triggerTransaction(ethereumData).subscribe(
       (transactionHash) => {
         console.log('Transaction triggered successfully.');
-        //this.showAlert('Ethereum transakcija uspesno izvrsena.', transactionHash);
+        this.showAlert('Ethereum transakcija uspesno izvrsena.', transactionHash);
       },
       (error) => {
         console.error('Error triggering transaction:', error);
-        //this.showAlert('Doslo je do greske pri izvrsavanju transakcije.', '');
+        this.showAlert('Doslo je do greske pri izvrsavanju transakcije.', '');
       }
     );
   }
@@ -175,11 +175,11 @@ export class IzmenaIspitaStudentPageComponent {
     });
   }
 
-  // private showAlert(message: string, transactionHash: string): void {
-  //   const ethernalLink = `https://app.tryethernal.com/transaction/${transactionHash}`;
-  //   const alertMessage = `${message}\n\nDetalji transakcije:\n${ethernalLink}`;
-  //   alert(alertMessage);
-  // }
+  private showAlert(message: string, transactionHash: string): void {
+    const ethernalLink = `https://app.tryethernal.com/transaction/${transactionHash}`;
+    const alertMessage = `${message}\n\nDetalji transakcije:\n${ethernalLink}`;
+    alert(alertMessage);
+  }
 
   compareWithId(o1: any, o2: any) {
     return o1?.id === o2?.id
