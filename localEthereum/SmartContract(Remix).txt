@@ -31,6 +31,8 @@ MOZE HARDHAT!!!
 0x2910574Bdf1895fDf0E558Fd023fD61b3de68cA3 -- OVO JE LOCAL ACCOUNT NOVI
 0x9c991C4802B107f696e3fE99505F1b0c2140DeA4 -- EVO GA UGOVOR NA GETH!!!
 0x5D0372feC37f39012851aAeB9F1E515de3E97C1c -- NOVI UGOVOR NA GETH!!
+
+0x3D308F1CEf53eC9Cd46cEB3f391D78406d901b8C -- NAJNOVIJI UGOVOR 24/01/2024, SA VALIDACIJOM ZA OWNER-A
 https://www.youtube.com/watch?v=dgdTyTl2Z18&ab_channel=Alchemy PRATILA OVAJ KLIP ALI SA TYPESCRIPT
 Pratiti fajlove, nikako ne smem imati 2 config.js, budu u konfliktu
 
@@ -42,4 +44,23 @@ https://app.tryethernal.com
 1. Importujem contract kao fajl
 2. Odem na contract
 3. Stavim naziv ugovora i upload-ujem iz artifacts foldera generisani .json file (od strane hardhata) koji sadrzi contractName i abi polja
+
+Izmenila smart contract 24/01/2024:
+
+-- Samo vlasnik ugovora ima ovlascenje da doda podatke o ispitu --
+
+1. Konstruktor setuje vrednost owner varijable na deployer-a ugovora
+2. Funkcija store proverava da li je posiljalac vlasnik pre nego sto se dozvoli dodavanje podataka o ispitu. Ako posiljalac nije vlasnik,
+dobijamo gresku 
+
+-- Require koristimo u Solidity-ju za validaciju
+require(condition, errorMessage);
+
+condition: boolean izraz koji mora da vraca true da bi se transakcija nastavila. Ako je uslov false, transakcija ce se revert-ovati i konzumirati sav gas. 
+errorMessage: opcion, string koji vraca detalje o greski
+
+require(msg.sender == owner, "Only the owner can store exam data");
+
+proveravam da li je adresa posiljaoca trenutne transakcije (msg.sender) jednaka adresi owner-a
+
 

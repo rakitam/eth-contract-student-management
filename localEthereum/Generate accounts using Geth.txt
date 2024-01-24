@@ -73,7 +73,8 @@ eth.getTransaction('0x29ec4af9bdea78f73901b50ed6d633473ced3fd3f1ab1d851917755511
 eth.getTransaction('0xc742df42c22922bb3151401ef1c339c0de033257013109d221c90baacd71f14d')
 eth.getTransaction('0x57d2f8160f4d2b10e5510484a64598180fc7f031ff6265249cacc7eea6a5dc8b')
 eth.getTransaction('0x174402946510fb753dff8c65ab366650c01408aad87d575e38e7df610b047d8e')
-
+eth.getTransaction('0xa7100337b443521f79f9b7cc0e3cf68998bcbd031710aa98a31b922e346341fe')
+eth.getTransaction('0x635fc48750d6db75eaeee60c4309ecfac105ed05cc9434d10dd38a61da5c3799')
 NAKON STO SMO POSLALI TRANSAKCIJU MORAMO MINE-OVATI
 
 miner.start()

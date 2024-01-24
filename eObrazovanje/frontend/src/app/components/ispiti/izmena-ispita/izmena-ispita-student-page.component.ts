@@ -8,10 +8,11 @@ import {Predaje} from "../../predavaci/predaje.model";
 import {Student} from "../../studenti/student.model";
 import {StudentPredmetService} from "../../student-predmet/student-predmet.service";
 import {RokService} from "../../rokovi/rok.service";
-import {Rok} from "../../rokovi/rok.model";
+import {MatDialog} from "@angular/material/dialog";
 import {CustomAdapter} from "../../../utils/custom-adapter.service";
 import {StudentService} from "../../studenti/student.service";
 import {EthereumService} from "../../ethereum.service";
+import {EthereumModalComponent} from "../../../ethereum-modal/ethereum-modal.component";
 
 @Component({
   selector: 'app-izmena-ispita-student-page',
@@ -37,7 +38,7 @@ export class IzmenaIspitaStudentPageComponent {
   constructor(private ispitService: IspitService, private studentService: StudentService,
               private router: Router, private route: ActivatedRoute, private predavaciService: PredavaciService,
               private studentPredmetService: StudentPredmetService, private ethereumService: EthereumService,
-              private rokService: RokService, private customAdapter: CustomAdapter) {}
+              private rokService: RokService, private customAdapter: CustomAdapter, private dialog: MatDialog) {}
 
   private ucitavanjePredavaca() {
     const username = this.route.snapshot.paramMap.get('username');
@@ -177,8 +178,16 @@ export class IzmenaIspitaStudentPageComponent {
 
   private showAlert(message: string, transactionHash: string): void {
     const ethernalLink = `https://app.tryethernal.com/transaction/${transactionHash}`;
-    const alertMessage = `${message}\n\nDetalji transakcije:\n${ethernalLink}`;
-    alert(alertMessage);
+
+    this.dialog.open(EthereumModalComponent, {
+      data: {
+        title: 'Detalji transakcije',
+        message: message,
+        link: ethernalLink
+      }
+    });
+    // const alertMessage = `${message}\n\nDetalji transakcije:\n${ethernalLink}`;
+    // alert(alertMessage);
   }
 
   compareWithId(o1: any, o2: any) {

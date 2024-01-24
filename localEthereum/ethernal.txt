@@ -6,6 +6,10 @@ set ETHERNAL_EMAIL=mrakita1993@gmail.com
 set ETHERNAL_PASSWORD=Sirobacilim1993
 
 ethernal listen
+lokalni eth server mora biti u mining modu da bi ethernal sam skontao deployment contract-a
 ethernal login ne mora ako sam logged in u browseru
 
 dodati i ABI contract-a
+
+DA BI TRANSAKCIJA BILA USPESNA U ETHERNAL, MORAM BITI U MINING MODE-U KAD JE SUBMITUJEM,
+inace vrati error

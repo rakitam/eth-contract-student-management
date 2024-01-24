@@ -9,6 +9,8 @@ pragma solidity >=0.8.2 <0.9.0;
  */
 contract EObrazovanje {
 
+    address public owner;
+
     struct ExamHistory {
         uint256 studentId;
         uint256 examId;
@@ -21,6 +23,13 @@ contract EObrazovanje {
     event ExamStored(uint256 indexed studentId, uint256 indexed examId, uint256 grade, uint256 date, uint256 professorId);
 
     /**
+     * @dev Constructor to set the deployer as the owner
+     */
+    constructor() {
+        owner = msg.sender;
+    }
+
+    /**
      * @dev Store value in variable
      * @param _studentId value to store
      * @param _examId Exam ID to store
@@ -29,6 +38,8 @@ contract EObrazovanje {
      * @param _professorId Professor ID to store
      */
     function store(uint256 _studentId, uint256 _examId, uint256 _grade, uint256 _date, uint256  _professorId) public {
+        require(msg.sender == owner, "Only the owner can store exam data");
+
         ExamHistory memory newExam = ExamHistory(_studentId, _examId, _grade, _date, _professorId);
         examHistory.push(newExam);
 

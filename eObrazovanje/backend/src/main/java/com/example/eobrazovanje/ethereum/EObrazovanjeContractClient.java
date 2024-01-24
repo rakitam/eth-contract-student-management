@@ -32,7 +32,7 @@ public class EObrazovanjeContractClient {
     public String invokeContract(EthereumTransactionData data) throws IOException {
 
         String nodeUrl = "http://127.0.0.1:8545";
-        String contractAddress = "0x5D0372feC37f39012851aAeB9F1E515de3E97C1c";
+        String contractAddress = "0x3D308F1CEf53eC9Cd46cEB3f391D78406d901b8C";
         String privateKey = System.getenv("CONTRACT_OWNER_PK");
 
         // Connect to Ethereum node

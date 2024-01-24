@@ -47,6 +47,8 @@ import { StudentProfileComponent } from './auth/student-profile/student-profile.
 import { SortComponent } from './sort/sort.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import {IzmenaIspitaStudentPageComponent} from "./components/ispiti/izmena-ispita/izmena-ispita-student-page.component";
+import { EthereumModalComponent } from './ethereum-modal/ethereum-modal.component';
+import {MatDialog, MatDialogModule} from "@angular/material/dialog";
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
@@ -150,17 +152,20 @@ const routes: Routes = [
     LoginComponent,
     PromenaLozinkeComponent,
     StudentProfileComponent,
-    SortComponent
+    SortComponent,
+    EthereumModalComponent
   ],
   imports: [
     BrowserModule, RouterModule.forRoot(routes), HttpClientModule, FormsModule,
     NgbModule,
-    NoopAnimationsModule
+    NoopAnimationsModule,
+    MatDialogModule
   ],
   providers: [
     { provide: NgbDateAdapter, useClass: CustomAdapter },
     { provide: NgbDateParserFormatter, useClass: CustomDateParserFormatter },
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    MatDialog
   ],
   bootstrap: [AppComponent]
 })

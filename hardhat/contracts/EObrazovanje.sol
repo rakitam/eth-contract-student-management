@@ -9,39 +9,50 @@ pragma solidity >=0.8.2 <0.9.0;
  */
 contract EObrazovanje {
 
+    address public owner;
+
     struct ExamHistory {
-        string studentId;
-        string courseId;
+        uint256 studentId;
+        uint256 examId;
         uint256 grade;
-        string date;
+        uint256 date;
         uint256 professorId;
     }
 
     ExamHistory[] public examHistory;
-    event ExamStored(string indexed studentId, string indexed courseId, uint256 grade, string date, uint256 professorId);
+    event ExamStored(uint256 indexed studentId, uint256 indexed examId, uint256 grade, uint256 date, uint256 professorId);
+
+    /**
+     * @dev Constructor to set the deployer as the owner
+     */
+    constructor() {
+        owner = msg.sender;
+    }
 
     /**
      * @dev Store value in variable
-     * @param _studentId Student ID to store
-     * @param _courseId Course ID to store
+     * @param _studentId value to store
+     * @param _examId Exam ID to store
      * @param _grade Grade to store
      * @param _date Date to store
      * @param _professorId Professor ID to store
      */
-    function store(string memory _studentId, string memory _courseId, uint256 _grade, string memory  _date, uint256  _professorId) public {
-        ExamHistory memory newExam = ExamHistory(_studentId, _courseId, _grade, _date, _professorId);
+    function store(uint256 _studentId, uint256 _examId, uint256 _grade, uint256 _date, uint256  _professorId) public {
+        require(msg.sender == owner, "Only the owner can store exam data");
+
+        ExamHistory memory newExam = ExamHistory(_studentId, _examId, _grade, _date, _professorId);
         examHistory.push(newExam);
 
-        emit ExamStored(_studentId, _courseId, _grade, _date, _professorId);
+        emit ExamStored(_studentId, _examId, _grade, _date, _professorId);
     }
     
     /**
      * @dev Return value 
-     * @return value of 'studentId, courseId, grade, date, professorId'
+     * @return value of 'studentId, examId, grade, date, professorId'
      */
-    function retrieveLatestExam() public view returns (string memory, string memory, uint256, string memory, uint256) {
+    function retrieveLatestExam() public view returns (uint256, uint256, uint256, uint256, uint256) {
         require(examHistory.length > 0, "No exams recorded yet");
         ExamHistory memory latestExam = examHistory[examHistory.length - 1];
-        return (latestExam.studentId, latestExam.courseId, latestExam.grade, latestExam.date, latestExam.professorId);
+        return (latestExam.studentId, latestExam.examId, latestExam.grade, latestExam.date, latestExam.professorId);
     }
 }
