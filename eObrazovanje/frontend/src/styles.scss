@@ -34,6 +34,7 @@ $eobrazovanje-frontend-theme: mat.define-light-theme((
 @include mat.all-component-themes($eobrazovanje-frontend-theme);
 
 /* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
 @import "node_modules/bootstrap/scss/bootstrap";
 
 .dropdown.active {
@@ -164,6 +165,14 @@ body {
   }
 }
 
-
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.btn-primary, .page-link.active, .active > .page-link, .dropdown-item.active {
+  background-color: #485e88 !important;
+  border: none !important;
+}
+
+.btn-primary:hover, .page-link.active:hover, .active > .page-link:hover {
+  background-color: #31415e !important;
+}

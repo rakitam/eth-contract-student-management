@@ -3,6 +3,11 @@
   <p>{{ data.message }}</p>
 </div>
 <div mat-dialog-actions>
-  <button mat-button mat-dialog-close>Close</button>
-  <a mat-button [href]="data.link" target="_blank">Detalji transakcije</a>
+  <div>
+    <a class="mat-button" mat-button [href]="data.link" target="_blank">Detalji transakcije</a>
+  </div>
+  <br>
+  <div>
+    <button class="mat-dialog-close btn btn-primary" mat-raised-button mat-dialog-close>Close</button>
+  </div>
 </div>

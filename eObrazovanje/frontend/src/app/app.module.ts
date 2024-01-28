@@ -49,6 +49,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import {IzmenaIspitaStudentPageComponent} from "./components/ispiti/izmena-ispita/izmena-ispita-student-page.component";
 import { EthereumModalComponent } from './ethereum-modal/ethereum-modal.component';
 import {MatDialog, MatDialogModule} from "@angular/material/dialog";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
@@ -159,7 +160,8 @@ const routes: Routes = [
     BrowserModule, RouterModule.forRoot(routes), HttpClientModule, FormsModule,
     NgbModule,
     NoopAnimationsModule,
-    MatDialogModule
+    MatDialogModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     { provide: NgbDateAdapter, useClass: CustomAdapter },

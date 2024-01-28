@@ -10,6 +10,9 @@ import {StudentPredmetService} from "../../student-predmet/student-predmet.servi
 import {RokService} from "../../rokovi/rok.service";
 import {CustomAdapter} from "../../../utils/custom-adapter.service";
 import {EthereumService} from "../../ethereum.service";
+import {EthereumModalComponent} from "../../../ethereum-modal/ethereum-modal.component";
+import {MatDialog} from "@angular/material/dialog";
+import {MatProgressSpinner} from "@angular/material/progress-spinner";
 
 @Component({
   selector: 'app-izmena-ispita',
@@ -30,11 +33,14 @@ export class IzmenaIspitaComponent {
   predavaci: Predaje[] = [];
   studenti: Student[] = [];
   aktivniRok: any | null = null;
-  isAddingFromProfile: boolean = false;
+  isAddingFromProfile = false;
+  isSubmitting = false;
+
 
   constructor(private ispitService: IspitService, private router: Router, private route: ActivatedRoute,
               private predavaciService: PredavaciService, private studentPredmetService: StudentPredmetService,
-              private ethereumService: EthereumService, private rokService: RokService, private customAdapter: CustomAdapter) {}
+              private ethereumService: EthereumService, private rokService: RokService, private customAdapter: CustomAdapter,
+              private dialog: MatDialog) {}
 
   private ucivanjePredavaca() {
     this.predavaciService.getAll({page: 0, size: Number.MAX_SAFE_INTEGER, aktivniZaRok: true}).subscribe(response => {
@@ -109,7 +115,8 @@ export class IzmenaIspitaComponent {
     }
     if (this.id) {
       this.ispitService.edit(this.ispit).pipe(catchError(err => {
-        return err;
+        this.handleBackendError(err);
+        throw err;
       })).subscribe(data => {
         if (this.ispit.konacno) {
           this.triggerEthereumTransaction();
@@ -119,7 +126,8 @@ export class IzmenaIspitaComponent {
       return;
     }
     this.ispitService.add(this.ispit).pipe(catchError(err => {
-      return err;
+      this.handleBackendError(err);
+      throw err;
     })).subscribe(data => {
       if (this.ispit.konacno) {
         this.triggerEthereumTransaction();
@@ -129,6 +137,7 @@ export class IzmenaIspitaComponent {
   }
 
   private triggerEthereumTransaction() {
+    this.isSubmitting = true;
     const ethereumData = {
       studentId: this.ispit.student?.brojIndeksa,
       courseId: this.ispit.predaje?.predmet?.oznaka,
@@ -140,24 +149,37 @@ export class IzmenaIspitaComponent {
     this.ethereumService.triggerTransaction(ethereumData).subscribe(
       (transactionHash) => {
         console.log('Transaction triggered successfully.');
-        const ethernalLink = `https://app.tryethernal.com/transaction/${transactionHash}`;
-        const alertMessage = `Ethereum transakcija uspesno izvrsena.\n\nDetalji transakcije:\n${ethernalLink}`;
-        alert(alertMessage);
-        //this.showAlert('Ethereum transakcija uspesno izvrsena.', transactionHash);
+        this.showAlert('Ethereum transakcija uspesno izvrsena.', transactionHash);
       },
       (error) => {
         console.error('Error triggering transaction:', error);
-        const errorMessage = 'Doslo je do greske pri izvrsavanju transakcije.\n\nDetalji transakcije:';
-        alert(errorMessage);
-        //this.showAlert('Doslo je do greske pri izvrsavanju transakcije.', '');
+        this.showAlert('Doslo je do greske pri izvrsavanju transakcije.', '');
       }
     );
   }
 
+  private handleBackendError(error: any): void {
+    let errorMessage = 'Greška prilikom čuvanja ispita';
+    if (error && error.error) {
+      errorMessage = error.error;
+    }
+    alert(errorMessage);
+  }
+
   private showAlert(message: string, transactionHash: string): void {
     const ethernalLink = `https://app.tryethernal.com/transaction/${transactionHash}`;
-    const alertMessage = `${message}\n\nDetalji transakcije:\n${ethernalLink}`;
-    alert(alertMessage);
+    const dialogRef = this.dialog.open(EthereumModalComponent, {
+      data: {
+        title: 'Detalji transakcije',
+        message: message,
+        link: ethernalLink
+      }
+    });
+    dialogRef.afterClosed().subscribe(() => {
+      this.isSubmitting = false;
+      const username = this.route.snapshot.paramMap.get('username');
+      this.router.navigate(['/profile', username]);
+    });
   }
 
   compareWithId(o1: any, o2: any) {

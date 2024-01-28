@@ -1,68 +1,62 @@
-<div class="d-flex justify-content-around mt-5" *ngIf="student">
-  <h1>{{student.ime}} {{student.prezime}}</h1>
-</div>
-<div class="d-flex justify-content-around mt-5">
-  <div class="w-25">
-    <br>
-    <ul class="list-group " *ngIf="student">
-      <li class="list-group-item">
-        <div class="ms-2 me-auto">
-          <div class="fw-bold">
-            Korisničko ime
+<div class="student-profile py-4" *ngIf="student">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3">
+        <div class="card shadow-sm">
+          <div class="card-header bg-transparent text-center">
+            <div style="height: 150px; overflow: hidden;">
+              <img src="assets/profile.png" alt="profile picture" style="max-width: 70%; max-height: 70%; display: block; margin: auto;">
+            </div>
+            <h3>{{student.ime}} {{student.prezime}}</h3>
           </div>
-          {{student.username}}
-        </div>
-      </li>
-      <li class="list-group-item">
-        <div class="ms-2 me-auto">
-          <div class="fw-bold">
-            Broj indeksa
+          <div>
+            <div class="d-flex flex-column card-body">
+              <button class="btn btn-warning" [routerLink]="['/studenti', student.username]">Izmena</button>
+              <button class="btn btn-primary" routerLink="/prijava-dodavanje" [queryParams]="{username: student.username}">Prijava ispita</button>
+            </div>
           </div>
-          {{student.brojIndeksa}}
         </div>
-      </li>
-      <li class="list-group-item">
-        <div class="ms-2 me-auto">
-          <div class="fw-bold">
-            Broj telefona
+      </div>
+      <div class="col-lg-9">
+        <div class="card shadow-sm">
+          <div class="card-header bg-transparent border-0">
+            <h3 class="mb-0"><i class="far fa-clone pr-1"></i>&nbsp;Opšte informacije</h3>
           </div>
-          {{student.brojTelefona}}
-        </div>
-      </li>
-      <li class="list-group-item">
-        <div class="ms-2 me-auto">
-          <div class="fw-bold">
-            JMBG
+          <div class="card-body pt-0">
+            <table class="table table-bordered">
+              <tr>
+                <th width="30%">Broj indeksa</th>
+                <td width="2%">:</td>
+                <td>{{student.brojIndeksa}}</td>
+              </tr>
+              <tr>
+                <th width="30%">Broj telefona</th>
+                <td width="2%">:</td>
+                <td>{{student.brojTelefona}}</td>
+              </tr>
+              <tr>
+                <th width="30%">JMBG</th>
+                <td width="2%">:</td>
+                <td>{{student.jmbg}}</td>
+              </tr>
+              <tr>
+                <th width="30%">Tekući račun</th>
+                <td width="2%">:</td>
+                <td>{{student.tekuciRacun}}</td>
+              </tr>
+              <tr>
+                <th width="30%">Stanje na računu</th>
+                <td width="2%">:</td>
+                <td>{{student.stanje}}</td>
+              </tr>
+            </table>
           </div>
-          {{student.jmbg}}
         </div>
-      </li>
-      <li class="list-group-item">
-        <div class="ms-2 me-auto">
-          <div class="fw-bold">
-            Tekući račun
-          </div>
-          {{student.tekuciRacun}}
-        </div>
-      </li>
-      <li class="list-group-item">
-        <div class="ms-2 me-auto">
-          <div class="fw-bold">
-            Stanje na računu
-          </div>
-          {{student.stanje}}
-        </div>
-      </li>
-    </ul>
-  </div>
-  <div class="w-25">
-    <div class="d-flex flex-column" *ngIf="student">
-      <button class="btn btn-warning" [routerLink]="['/studenti', student.username]">Izmena</button>
-      <br>
-      <button class="btn btn-primary" routerLink="/prijava-dodavanje" [queryParams]="{username: student.username}">Prijava ispita</button>
+      </div>
     </div>
   </div>
 </div>
+
 <div class="mojaklasa d-flex justify-content-around mt-5 mx-auto">
   <div class="w-75">
     <nav ngbNav #nav="ngbNav" class="nav-tabs">

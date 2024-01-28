@@ -9,6 +9,7 @@ import {Student} from "../../studenti/student.model";
 import {StudentPredmetService} from "../../student-predmet/student-predmet.service";
 import {RokService} from "../../rokovi/rok.service";
 import {MatDialog} from "@angular/material/dialog";
+import {MatProgressSpinner} from "@angular/material/progress-spinner";
 import {CustomAdapter} from "../../../utils/custom-adapter.service";
 import {StudentService} from "../../studenti/student.service";
 import {EthereumService} from "../../ethereum.service";
@@ -33,7 +34,8 @@ export class IzmenaIspitaStudentPageComponent {
   predavaci: Predaje[] = [];
   studenti: Student[] = [];
   aktivniRok: any | null = null;
-  isAddingFromProfile: boolean = true;
+  isAddingFromProfile = true;
+  isSubmitting = false;
 
   constructor(private ispitService: IspitService, private studentService: StudentService,
               private router: Router, private route: ActivatedRoute, private predavaciService: PredavaciService,
@@ -130,7 +132,8 @@ export class IzmenaIspitaStudentPageComponent {
 
     if (this.id) {
       this.ispitService.edit(this.ispit).pipe(catchError(err => {
-        return err;
+        this.handleBackendError(err);
+        throw err;
       })).subscribe(data => {
         if (this.ispit.konacno) {
           this.triggerEthereumTransaction();
@@ -140,7 +143,8 @@ export class IzmenaIspitaStudentPageComponent {
       return;
     }
     this.ispitService.add(this.ispit).pipe(catchError(err => {
-      return err;
+      this.handleBackendError(err);
+      throw err;
     })).subscribe(data => {
       if (this.ispit.konacno) {
         this.triggerEthereumTransaction();
@@ -150,6 +154,7 @@ export class IzmenaIspitaStudentPageComponent {
   }
 
   private triggerEthereumTransaction() {
+    this.isSubmitting = true;
     const ethereumData = {
       studentId: this.ispit.student?.brojIndeksa,
       courseId: this.ispit.predaje?.predmet?.oznaka,
@@ -170,6 +175,14 @@ export class IzmenaIspitaStudentPageComponent {
     );
   }
 
+  private handleBackendError(error: any): void {
+    let errorMessage = 'Greška prilikom čuvanja ispita';
+    if (error && error.error) {
+      errorMessage = error.error;
+    }
+    alert(errorMessage);
+  }
+
   private fetchStudentDetails(username: string): void {
     this.studentService.get(username).subscribe(student => {
       this.ispit.student = student;
@@ -178,16 +191,19 @@ export class IzmenaIspitaStudentPageComponent {
 
   private showAlert(message: string, transactionHash: string): void {
     const ethernalLink = `https://app.tryethernal.com/transaction/${transactionHash}`;
-
-    this.dialog.open(EthereumModalComponent, {
+    const hasError = !!message;
+    const dialogRef = this.dialog.open(EthereumModalComponent, {
       data: {
         title: 'Detalji transakcije',
         message: message,
-        link: ethernalLink
+        link: hasError ? '' : ethernalLink
       }
     });
-    // const alertMessage = `${message}\n\nDetalji transakcije:\n${ethernalLink}`;
-    // alert(alertMessage);
+    dialogRef.afterClosed().subscribe(() => {
+      this.isSubmitting = false;
+      const username = this.route.snapshot.paramMap.get('username');
+      this.router.navigate(['/profile', username]);
+    });
   }
 
   compareWithId(o1: any, o2: any) {

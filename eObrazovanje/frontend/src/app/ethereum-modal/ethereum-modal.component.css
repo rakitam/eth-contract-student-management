@@ -1,0 +1,27 @@
+.mat-mdc-dialog-actions {
+  display: block;
+  padding-left: 20px;
+}
+
+.mat-dialog-close {
+  background-color: #485e88;
+  color: white;
+  border-color: #485e88;
+  padding: 5px 15px;
+}
+
+.mat-dialog-close:hover {
+  background-color: #31415e;
+}
+
+.mat-mdc-dialog-title {
+  font-size: 20px;
+  color: white;
+  padding-bottom: 10px;
+  background-color: #485e88;
+}
+
+.mat-mdc-dialog-content {
+  padding-top: 20px;
+  color: black;
+}

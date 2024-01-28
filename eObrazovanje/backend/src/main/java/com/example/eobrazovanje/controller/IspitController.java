@@ -66,11 +66,15 @@ public class IspitController {
     @PostMapping
     @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<IspitDto> create(@RequestBody IspitDto ispitDto) throws Exception {
-        if(ispitDto.getId() != null && ispitDto.getId() > 0) {
-            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        try {
+            if(ispitDto.getId() != null && ispitDto.getId() > 0) {
+                return new ResponseEntity(HttpStatus.BAD_REQUEST);
+            }
+            Ispit ispit = ispitService.save(ispitMapper.toEntity(ispitDto));
+            return new ResponseEntity<IspitDto>(ispitMapper.toDto(ispit), HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        Ispit ispit = ispitService.save(ispitMapper.toEntity(ispitDto));
-        return new ResponseEntity<IspitDto>(ispitMapper.toDto(ispit), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")

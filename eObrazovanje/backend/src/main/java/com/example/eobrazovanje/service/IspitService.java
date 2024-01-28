@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -30,6 +31,16 @@ public class IspitService {
     }
 
     public Ispit save(Ispit ispit) throws Exception {
+        // Check if the student already has results for the exam
+        List<Ispit> existingResults = repo.findAllByStudentAndPredaje(ispit.getStudent(),
+                ispit.getPredaje());
+        if (!existingResults.isEmpty()) {
+            if (existingResults.stream().anyMatch(result -> result.getKonacno())) {
+                System.out.println("Jesi uso");
+                throw new Exception("Student je vec polagao ovaj ispit.");
+            }
+        }
+
         if (ispit.getId() == null || ispit.getId() == 0) {
             return repo.save(ispit);
         } else {
