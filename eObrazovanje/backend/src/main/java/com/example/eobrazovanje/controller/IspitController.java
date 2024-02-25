@@ -87,7 +87,7 @@ public class IspitController {
             Ispit ispit = ispitService.save(ispitMapper.toEntity(ispitDto));
             return new ResponseEntity<IspitDto>(ispitMapper.toDto(ispit), HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
