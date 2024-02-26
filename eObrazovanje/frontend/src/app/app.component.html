@@ -9,3 +9,6 @@
     </p>
   </div>
 </footer>
+<div class="spinner" *ngIf="isLoading | async">
+  <mat-spinner mode="indeterminate"></mat-spinner>
+</div>

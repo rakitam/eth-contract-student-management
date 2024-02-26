@@ -45,7 +45,7 @@ import { PromenaLozinkeComponent } from './auth/promena-lozinke/promena-lozinke.
 import {AuthGuard} from "./auth/auth.guard";
 import { StudentProfileComponent } from './auth/student-profile/student-profile.component';
 import { SortComponent } from './sort/sort.component';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import {BrowserAnimationsModule, NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {IzmenaIspitaStudentPageComponent} from "./components/ispiti/izmena-ispita/izmena-ispita-student-page.component";
 import { EthereumModalComponent } from './ethereum-modal/ethereum-modal.component';
 import {MatDialog, MatDialogModule} from "@angular/material/dialog";
@@ -161,7 +161,8 @@ const routes: Routes = [
     NgbModule,
     NoopAnimationsModule,
     MatDialogModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    BrowserAnimationsModule
   ],
   providers: [
     { provide: NgbDateAdapter, useClass: CustomAdapter },

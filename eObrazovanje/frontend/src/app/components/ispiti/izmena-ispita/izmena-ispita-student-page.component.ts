@@ -9,11 +9,11 @@ import {Student} from "../../studenti/student.model";
 import {StudentPredmetService} from "../../student-predmet/student-predmet.service";
 import {RokService} from "../../rokovi/rok.service";
 import {MatDialog} from "@angular/material/dialog";
-import {MatProgressSpinner} from "@angular/material/progress-spinner";
 import {CustomAdapter} from "../../../utils/custom-adapter.service";
 import {StudentService} from "../../studenti/student.service";
 import {EthereumService} from "../../ethereum.service";
 import {EthereumModalComponent} from "../../../ethereum-modal/ethereum-modal.component";
+import {SpinnerService} from "../../../utils/spinner.service";
 
 @Component({
   selector: 'app-izmena-ispita-student-page',
@@ -35,12 +35,14 @@ export class IzmenaIspitaStudentPageComponent {
   studenti: Student[] = [];
   aktivniRok: any | null = null;
   isAddingFromProfile = true;
-  isSubmitting = false;
 
   constructor(private ispitService: IspitService, private studentService: StudentService,
               private router: Router, private route: ActivatedRoute, private predavaciService: PredavaciService,
               private studentPredmetService: StudentPredmetService, private ethereumService: EthereumService,
-              private rokService: RokService, private customAdapter: CustomAdapter, private dialog: MatDialog) {}
+              private rokService: RokService, private customAdapter: CustomAdapter, private dialog: MatDialog,
+              private spinnerService: SpinnerService) {
+
+  }
 
   private ucitavanjePredavaca() {
     const username = this.route.snapshot.paramMap.get('username');
@@ -154,7 +156,7 @@ export class IzmenaIspitaStudentPageComponent {
   }
 
   private triggerEthereumTransaction() {
-    this.isSubmitting = true;
+    this.spinnerService.setLoading(true);
     const ethereumData = {
       studentId: this.ispit.student?.brojIndeksa,
       courseId: this.ispit.predaje?.predmet?.oznaka,
@@ -200,7 +202,7 @@ export class IzmenaIspitaStudentPageComponent {
       }
     });
     dialogRef.afterClosed().subscribe(() => {
-      this.isSubmitting = false;
+      this.spinnerService.setLoading(false)
       const username = this.route.snapshot.paramMap.get('username');
       this.router.navigate(['/profile', username]);
     });
