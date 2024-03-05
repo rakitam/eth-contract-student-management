@@ -1,10 +1,10 @@
-<h1 mat-dialog-title>{{ data.title }}</h1>
+<h1 mat-dialog-title>{{data.title}}</h1>
 <div mat-dialog-content>
-  <p>{{ data.message }}</p>
+  <p>{{data.message}}</p>
 </div>
 <div mat-dialog-actions>
   <div>
-    <a class="mat-button" mat-button [href]="data.link" target="_blank">Detalji transakcije</a>
+    <a class="mat-button" mat-button [href]="'https://app.tryethernal.com/transaction/' + data.transactionHash" target="_blank">Detalji transakcije</a>
   </div>
   <br>
   <div>

@@ -192,13 +192,14 @@ export class IzmenaIspitaStudentPageComponent {
   }
 
   private showAlert(message: string, transactionHash: string): void {
-    const ethernalLink = `https://app.tryethernal.com/transaction/${transactionHash}`;
+    console.log('Transaction hash:', transactionHash);
+    //const ethernalLink = `https://app.tryethernal.com/transaction/${transactionHash}`;
     const hasError = !!message;
     const dialogRef = this.dialog.open(EthereumModalComponent, {
       data: {
         title: 'Detalji transakcije',
         message: message,
-        link: hasError ? '' : ethernalLink
+        transactionHash: hasError ? '' : transactionHash
       }
     });
     dialogRef.afterClosed().subscribe(() => {

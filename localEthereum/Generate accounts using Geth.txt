@@ -50,7 +50,11 @@ geth --datadir ./chaindata --http --http.corsdomain "chrome-extension://nkbihfbe
 geth --datadir ./chaindata --http --http.corsdomain "chrome-extension://nkbihfbeogaeaoehlefnkodbefgpgknn/home.html" --http.api web3,eth,debug,personal,miner,net --ws --ws.api web3,eth,debug,personal,net --vmdebug --networkid 10 --miner.gasprice 1 --allow-insecure-unlock --unlock "0x3134961a3100950857b9da622c992e0efddeb406" console
 
 !!!Samo sta mi treba za transakciju!!!
-geth --datadir ./chaindata --http --http.api web3,eth,debug,personal,miner,net --ws --ws.api web3,eth,debug,personal,net --vmdebug --networkid 10 --miner.etherbase "0x2910574Bdf1895fDf0E558Fd023fD61b3de68cA3" --miner.gasprice 1 --allow-insecure-unlock --unlock "0x2910574Bdf1895fDf0E558Fd023fD61b3de68cA3" --password ./password.txt console
+geth --datadir ./chaindata --http --http.corsdomain * --http.api web3,eth,debug,personal,miner,net --ws --ws.api web3,eth,debug,personal,net --vmdebug --networkid 10 --miner.etherbase "0x2910574Bdf1895fDf0E558Fd023fD61b3de68cA3" --miner.gasprice 1 --allow-insecure-unlock --unlock "0x2910574Bdf1895fDf0E558Fd023fD61b3de68cA3" --password ./password.txt console
+
+!!!Za diplomski!!! probacemo bez web socketa, on je samo ako se direkt ocitavaju izmene sa blokcejna na sajt
+geth --datadir ./chaindata --allow-insecure-unlock --unlock "0x2910574Bdf1895fDf0E558Fd023fD61b3de68cA3" --password ./password.txt --http --http.corsdomain * --http.api web3,eth,personal,miner,net --miner.etherbase "0x2910574Bdf1895fDf0E558Fd023fD61b3de68cA3" --miner.gasprice 1 console
+geth attach http://127.0.0.1:8545
 
 SALJEM PARE PREKO KONZOLE
 eth.accounts, eth.coinbase mogu tek kad sam pokrenula server
@@ -63,6 +67,10 @@ web3.personal.listAccounts.includes('0x13Ca4181D5012101856eF5c5963174161db7Ef2A'
 2. Saljemo kes
 eth.sendTransaction({
   from: '0x2910574Bdf1895fDf0E558Fd023fD61b3de68cA3', to: '0xCbAf0dAf5081557F0ccC9226a8226A1389D36c08', value: web3.toWei(0.1, 'ether'), gasPrice: web3.toWei(1, 'gwei')
+});
+
+eth.sendTransaction({
+  from: '0x2910574Bdf1895fDf0E558Fd023fD61b3de68cA3', to: '0xae98c09c1b2e0dac9bc5f2a267e8ecc9f91a2375', value: web3.toWei(0.1, 'ether'), gasPrice: web3.toWei(1, 'gwei')
 });
 
 3. Ako je zeleni string, izgleda da je poslato
@@ -102,4 +110,7 @@ eth.getBalance("0xCbAf0dAf5081557F0ccC9226a8226A1389D36c08")
 
 eth.accounts
 
+eth.getTransactionReceipt("0x987cb302e83c19725a732e55583d36868c1e70b426ebf334f7df90ac1c9f2174")
+
+komanda za stopiranje je exit
 

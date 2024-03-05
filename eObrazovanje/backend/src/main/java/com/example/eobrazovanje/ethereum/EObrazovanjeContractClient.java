@@ -32,7 +32,7 @@ public class EObrazovanjeContractClient {
     public String invokeContract(EthereumTransactionData data) throws IOException {
 
         String nodeUrl = "http://127.0.0.1:8545";
-        String contractAddress = "0x3D308F1CEf53eC9Cd46cEB3f391D78406d901b8C";
+        String contractAddress = "0x47b976202A82a4E30b5A729D944221Ae91d7479B";
         String privateKey = System.getenv("CONTRACT_OWNER_PK");
 
         // Connect to Ethereum node
@@ -43,7 +43,7 @@ public class EObrazovanjeContractClient {
         // Load credentials
         Credentials credentials = Credentials.create(privateKey);
 
-        Utf8String  studentId = data.getStudentId();
+        Utf8String studentId = data.getStudentId();
         Utf8String courseId = data.getCourseId();
         Uint256 grade = data.getGrade();
         Utf8String date = data.getDate();
@@ -57,8 +57,8 @@ public class EObrazovanjeContractClient {
         // Encode the function data
         String encodedFunction = FunctionEncoder.encode(function);
 
-        BigInteger gasLimit = BigInteger.valueOf(50000);
-        BigInteger gasPrice = BigInteger.valueOf(10_000_000_000L);
+        BigInteger gasLimit = BigInteger.valueOf(300000);
+        BigInteger gasPrice = BigInteger.valueOf(1_000_000_000L);
 
         try {
             // Send the transaction
@@ -71,6 +71,7 @@ public class EObrazovanjeContractClient {
                     encodedFunction)).send().getTransactionHash();
 
             log.info("Transaction Hash: " + transactionHash);
+
             return transactionHash;
 
         } catch (Exception e) {

@@ -19,6 +19,11 @@ public class EthereumController {
 
     @PostMapping("/trigger-transaction")
     public ResponseEntity<String> triggerTransaction(@RequestBody EthereumTransactionData data) throws IOException {
+        // Check if EthereumTransactionData object is null
+        if (data == null) {
+            return ResponseEntity.badRequest().body("Request body is missing or empty");
+        }
+
         // Extract values from EthereumTransactionData
         String studentId = data.getStudentId().getValue();
         String courseId = data.getCourseId().getValue();
